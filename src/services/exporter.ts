@@ -8,6 +8,8 @@ import {
   settingsRepository,
   seasonRepository,
   plantingRepository,
+  plantingScheduleRepository,
+  scheduleTaskRepository,
   seedRepository,
   taskRuleRepository,
   userPlantKnowledgeRepository,
@@ -22,6 +24,8 @@ import { gardenBedSchema } from "../validation/gardenBed.schema.ts";
 import { settingsSchema } from "../validation/settings.schema.ts";
 import { seasonSchema } from "../validation/season.schema.ts";
 import { plantingSchema } from "../validation/planting.schema.ts";
+import { plantingScheduleSchema } from "../validation/plantingSchedule.schema.ts";
+import { scheduleTaskSchema } from "../validation/scheduleTask.schema.ts";
 import { seedSchema } from "../validation/seed.schema.ts";
 import { taskRuleSchema } from "../validation/taskRule.schema.ts";
 import { userPlantKnowledgeSchema } from "../validation/userPlantKnowledge.schema.ts";
@@ -59,6 +63,8 @@ export type ImportResult = {
     photos: number;
     seasons: number;
     plantings: number;
+    plantingSchedules: number;
+    scheduleTasks: number;
     seeds: number;
     taskRules: number;
     userPlantKnowledge: number;
@@ -147,6 +153,8 @@ export async function exportAll(): Promise<Blob> {
     gardenBeds,
     seasons,
     plantings,
+    plantingSchedules,
+    scheduleTasks,
     seeds,
     allTaskRules,
     userPlantKnowledge,
@@ -157,6 +165,8 @@ export async function exportAll(): Promise<Blob> {
     gardenBedRepository.getAll(),
     seasonRepository.getAll(),
     plantingRepository.getAll(),
+    plantingScheduleRepository.getAll(),
+    scheduleTaskRepository.getAll(),
     seedRepository.getAll(),
     taskRuleRepository.getAll(),
     userPlantKnowledgeRepository.getAll(),
@@ -190,6 +200,8 @@ export async function exportAll(): Promise<Blob> {
   dataFolder.file("gardenBeds.json", JSON.stringify(gardenBeds));
   dataFolder.file("seasons.json", JSON.stringify(seasons));
   dataFolder.file("plantings.json", JSON.stringify(plantings));
+  dataFolder.file("plantingSchedules.json", JSON.stringify(plantingSchedules));
+  dataFolder.file("scheduleTasks.json", JSON.stringify(scheduleTasks));
   dataFolder.file("seeds.json", JSON.stringify(seeds));
   dataFolder.file("taskRules.json", JSON.stringify(taskRules));
   dataFolder.file("userPlantKnowledge.json", JSON.stringify(userPlantKnowledge));
@@ -312,6 +324,18 @@ export function getTableValidations(): TableValidation[] {
       docType: "planting",
     },
     {
+      filename: "data/plantingSchedules.json",
+      schema: plantingScheduleSchema,
+      countKey: "plantingSchedules",
+      docType: "plantingSchedule",
+    },
+    {
+      filename: "data/scheduleTasks.json",
+      schema: scheduleTaskSchema,
+      countKey: "scheduleTasks",
+      docType: "scheduleTask",
+    },
+    {
       filename: "data/seeds.json",
       schema: seedSchema,
       countKey: "seeds",
@@ -345,6 +369,8 @@ export async function importFromZip(file: File): Promise<ImportResult> {
     photos: 0,
     seasons: 0,
     plantings: 0,
+    plantingSchedules: 0,
+    scheduleTasks: 0,
     seeds: 0,
     taskRules: 0,
     userPlantKnowledge: 0,

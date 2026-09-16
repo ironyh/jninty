@@ -59,6 +59,8 @@ export async function parseZip(file: File): Promise<ParsedImport> {
     photos: 0,
     seasons: 0,
     plantings: 0,
+    plantingSchedules: 0,
+    scheduleTasks: 0,
     seeds: 0,
     taskRules: 0,
     userPlantKnowledge: 0,

@@ -26,6 +26,8 @@ const COUNT_LABELS: Array<{ key: keyof ImportResult["counts"]; label: string }> 
   { key: "gardenBeds", label: "Garden Beds" },
   { key: "seasons", label: "Seasons" },
   { key: "plantings", label: "Plantings" },
+  { key: "plantingSchedules", label: "Planting Schedules" },
+  { key: "scheduleTasks", label: "Schedule Tasks" },
   { key: "seeds", label: "Seeds" },
   { key: "taskRules", label: "Task Rules" },
   { key: "userPlantKnowledge", label: "Plant Knowledge" },
