@@ -1,18 +1,8 @@
 import MiniSearch from "minisearch";
-import { plantKnowledgeSchema } from "../validation/plantKnowledge.schema.ts";
 import type { PlantKnowledge } from "../validation/plantKnowledge.schema.ts";
 import type { UserPlantKnowledge } from "../validation/userPlantKnowledge.schema.ts";
 import type { KnowledgeBaseItem, SchedulablePlant, SpeciesGroup } from "./knowledgeBaseTypes.ts";
-import { z } from "zod";
-
-import vegetablesData from "../../data/plants/vegetables.json";
-import herbsData from "../../data/plants/herbs.json";
-import fruitsData from "../../data/plants/fruits.json";
-import flowersData from "../../data/plants/flowers.json";
-
-// ─── Schema for the full JSON array ───
-
-const plantKnowledgeArraySchema = z.array(plantKnowledgeSchema);
+import { loadBuiltinPlantKnowledge } from "./knowledgeSource.builtin.ts";
 
 // ─── Module-level cache ───
 
@@ -28,12 +18,7 @@ let cache: PlantKnowledge[] | null = null;
 export function loadKnowledgeBase(): PlantKnowledge[] {
   if (cache) return cache;
 
-  const vegetables = plantKnowledgeArraySchema.parse(vegetablesData);
-  const herbs = plantKnowledgeArraySchema.parse(herbsData);
-  const fruits = plantKnowledgeArraySchema.parse(fruitsData);
-  const flowers = plantKnowledgeArraySchema.parse(flowersData);
-
-  cache = [...vegetables, ...herbs, ...fruits, ...flowers];
+  cache = loadBuiltinPlantKnowledge();
   return cache;
 }
 
