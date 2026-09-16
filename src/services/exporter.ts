@@ -5,6 +5,7 @@ import {
   journalRepository,
   taskRepository,
   gardenBedRepository,
+  expenseRepository,
   settingsRepository,
   seasonRepository,
   plantingRepository,
@@ -19,6 +20,7 @@ import { plantInstanceSchema } from "../validation/plantInstance.schema.ts";
 import { journalEntrySchema } from "../validation/journalEntry.schema.ts";
 import { taskSchema } from "../validation/task.schema.ts";
 import { gardenBedSchema } from "../validation/gardenBed.schema.ts";
+import { expenseSchema } from "../validation/expense.schema.ts";
 import { settingsSchema } from "../validation/settings.schema.ts";
 import { seasonSchema } from "../validation/season.schema.ts";
 import { plantingSchema } from "../validation/planting.schema.ts";
@@ -60,6 +62,7 @@ export type ImportResult = {
     seasons: number;
     plantings: number;
     seeds: number;
+    expenses: number;
     taskRules: number;
     userPlantKnowledge: number;
   };
@@ -148,6 +151,7 @@ export async function exportAll(): Promise<Blob> {
     seasons,
     plantings,
     seeds,
+    expenses,
     allTaskRules,
     userPlantKnowledge,
   ] = await Promise.all([
@@ -158,6 +162,7 @@ export async function exportAll(): Promise<Blob> {
     seasonRepository.getAll(),
     plantingRepository.getAll(),
     seedRepository.getAll(),
+    expenseRepository.getAll(),
     taskRuleRepository.getAll(),
     userPlantKnowledgeRepository.getAll(),
   ]);
@@ -191,6 +196,7 @@ export async function exportAll(): Promise<Blob> {
   dataFolder.file("seasons.json", JSON.stringify(seasons));
   dataFolder.file("plantings.json", JSON.stringify(plantings));
   dataFolder.file("seeds.json", JSON.stringify(seeds));
+  dataFolder.file("expenses.json", JSON.stringify(expenses));
   dataFolder.file("taskRules.json", JSON.stringify(taskRules));
   dataFolder.file("userPlantKnowledge.json", JSON.stringify(userPlantKnowledge));
   dataFolder.file("settings.json", JSON.stringify(settingsArray));
@@ -318,6 +324,12 @@ export function getTableValidations(): TableValidation[] {
       docType: "seed",
     },
     {
+      filename: "data/expenses.json",
+      schema: expenseSchema,
+      countKey: "expenses",
+      docType: "expense",
+    },
+    {
       filename: "data/taskRules.json",
       schema: taskRuleSchema,
       countKey: "taskRules",
@@ -346,6 +358,7 @@ export async function importFromZip(file: File): Promise<ImportResult> {
     seasons: 0,
     plantings: 0,
     seeds: 0,
+    expenses: 0,
     taskRules: 0,
     userPlantKnowledge: 0,
   };

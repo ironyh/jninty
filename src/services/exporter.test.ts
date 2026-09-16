@@ -375,6 +375,7 @@ describe("importFromZip", () => {
       seasons: 0,
       plantings: 0,
       seeds: 0,
+      expenses: 0,
       taskRules: 0,
       userPlantKnowledge: 0,
     });
@@ -471,6 +472,7 @@ describe("importFromZip", () => {
       seasons: 0,
       plantings: 0,
       seeds: 0,
+      expenses: 0,
       taskRules: 0,
       userPlantKnowledge: 0,
     });

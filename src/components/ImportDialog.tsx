@@ -27,6 +27,7 @@ const COUNT_LABELS: Array<{ key: keyof ImportResult["counts"]; label: string }> 
   { key: "seasons", label: "Seasons" },
   { key: "plantings", label: "Plantings" },
   { key: "seeds", label: "Seeds" },
+  { key: "expenses", label: "Expenses" },
   { key: "taskRules", label: "Task Rules" },
   { key: "userPlantKnowledge", label: "Plant Knowledge" },
   { key: "photos", label: "Photos" },
