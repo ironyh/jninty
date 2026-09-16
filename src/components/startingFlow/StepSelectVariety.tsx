@@ -41,7 +41,7 @@ export default function StepSelectVariety({
         <div className="mt-4 space-y-1.5">
           {entries.map((entry) => (
             <button
-              key={builtInEntryId(entry.species, entry.variety)}
+              key={builtInEntryId(entry)}
               type="button"
               onClick={() => onSelect(entry)}
               className="flex w-full items-center justify-between rounded-lg border border-border-default px-3 py-2.5 text-left transition-colors hover:bg-surface-muted"

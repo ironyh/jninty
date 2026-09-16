@@ -28,6 +28,10 @@ export const schedulingSchema = z
 
 export const plantKnowledgeSchema = z
   .object({
+    // Stable, immutable entry identity. Seeded from the legacy name
+    // derivation and frozen; never regenerated from names.
+    // Registry: data/plants/knowledge-ids.json
+    knowledgeId: z.string().min(1).optional(),
     species: z.string().min(1),
     variety: z.string().min(1).optional(),
     commonName: z.string().min(1),

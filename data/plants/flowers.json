@@ -35,7 +35,8 @@
       "downy mildew",
       "rust",
       "sclerotinia"
-    ]
+    ],
+    "knowledgeId": "builtin-helianthus-annuus"
   },
   {
     "species": "Helianthus annuus",
@@ -86,7 +87,8 @@
       "downy mildew",
       "rust",
       "sclerotinia"
-    ]
+    ],
+    "knowledgeId": "builtin-helianthus-annuus-mammoth"
   },
   {
     "species": "Helianthus annuus",
@@ -137,7 +139,8 @@
       "downy mildew",
       "rust",
       "sclerotinia"
-    ]
+    ],
+    "knowledgeId": "builtin-helianthus-annuus-teddy-bear"
   },
   {
     "species": "Helianthus annuus",
@@ -188,7 +191,8 @@
       "downy mildew",
       "rust",
       "sclerotinia"
-    ]
+    ],
+    "knowledgeId": "builtin-helianthus-annuus-autumn-beauty"
   },
   {
     "species": "Tagetes spp.",
@@ -226,7 +230,8 @@
     "commonDiseases": [
       "powdery mildew",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-tagetes-spp"
   },
   {
     "species": "Tagetes spp.",
@@ -277,7 +282,8 @@
     "commonDiseases": [
       "powdery mildew",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-tagetes-spp-french"
   },
   {
     "species": "Tagetes spp.",
@@ -328,7 +334,8 @@
     "commonDiseases": [
       "powdery mildew",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-tagetes-spp-african"
   },
   {
     "species": "Zinnia elegans",
@@ -359,7 +366,8 @@
     "commonDiseases": [
       "powdery mildew",
       "bacterial leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-zinnia-elegans"
   },
   {
     "species": "Zinnia elegans",
@@ -403,7 +411,8 @@
     "commonDiseases": [
       "powdery mildew",
       "bacterial leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-zinnia-elegans-giant-dahlia"
   },
   {
     "species": "Zinnia elegans",
@@ -447,7 +456,8 @@
     "commonDiseases": [
       "powdery mildew",
       "bacterial leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-zinnia-elegans-profusion"
   },
   {
     "species": "Zinnia elegans",
@@ -491,7 +501,8 @@
     "commonDiseases": [
       "powdery mildew",
       "bacterial leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-zinnia-elegans-state-fair"
   },
   {
     "species": "Petunia × hybrida",
@@ -523,7 +534,8 @@
     "commonDiseases": [
       "botrytis",
       "tobacco mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-petunia-hybrida"
   },
   {
     "species": "Rosa spp.",
@@ -560,7 +572,8 @@
       "black spot",
       "powdery mildew",
       "rust"
-    ]
+    ],
+    "knowledgeId": "builtin-rosa-spp"
   },
   {
     "species": "Dahlia spp.",
@@ -594,7 +607,8 @@
       "powdery mildew",
       "botrytis",
       "dahlia smut"
-    ]
+    ],
+    "knowledgeId": "builtin-dahlia-spp"
   },
   {
     "species": "Cosmos bipinnatus",
@@ -625,7 +639,8 @@
     "commonDiseases": [
       "powdery mildew",
       "stem canker"
-    ]
+    ],
+    "knowledgeId": "builtin-cosmos-bipinnatus"
   },
   {
     "species": "Cosmos bipinnatus",
@@ -669,7 +684,8 @@
     "commonDiseases": [
       "powdery mildew",
       "stem canker"
-    ]
+    ],
+    "knowledgeId": "builtin-cosmos-bipinnatus-sensation"
   },
   {
     "species": "Cosmos bipinnatus",
@@ -713,7 +729,8 @@
     "commonDiseases": [
       "powdery mildew",
       "stem canker"
-    ]
+    ],
+    "knowledgeId": "builtin-cosmos-bipinnatus-chocolate"
   },
   {
     "species": "Tropaeolum majus",
@@ -744,7 +761,8 @@
     ],
     "commonDiseases": [
       "bacterial wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-tropaeolum-majus"
   },
   {
     "species": "Tropaeolum majus",
@@ -788,7 +806,8 @@
     ],
     "commonDiseases": [
       "bacterial wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-tropaeolum-majus-jewel-mix"
   },
   {
     "species": "Ipomoea purpurea",
@@ -818,7 +837,8 @@
     "commonDiseases": [
       "rust",
       "white blister"
-    ]
+    ],
+    "knowledgeId": "builtin-ipomoea-purpurea"
   },
   {
     "species": "Lathyrus odoratus",
@@ -847,7 +867,8 @@
     "commonDiseases": [
       "powdery mildew",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-lathyrus-odoratus"
   },
   {
     "species": "Echinacea purpurea",
@@ -880,7 +901,8 @@
     "commonDiseases": [
       "powdery mildew",
       "aster yellows"
-    ]
+    ],
+    "knowledgeId": "builtin-echinacea-purpurea"
   },
   {
     "species": "Rudbeckia hirta",
@@ -912,7 +934,8 @@
     "commonDiseases": [
       "powdery mildew",
       "septoria leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-rudbeckia-hirta"
   },
   {
     "species": "Hibiscus moscheutos",
@@ -945,7 +968,8 @@
       "leaf spot",
       "botrytis",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-hibiscus-moscheutos"
   },
   {
     "species": "Hydrangea macrophylla",
@@ -979,6 +1003,7 @@
       "powdery mildew",
       "leaf spot",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-hydrangea-macrophylla"
   }
 ]

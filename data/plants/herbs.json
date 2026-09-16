@@ -35,7 +35,8 @@
     "commonDiseases": [
       "fusarium wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-ocimum-basilicum"
   },
   {
     "species": "Ocimum basilicum",
@@ -86,7 +87,8 @@
     "commonDiseases": [
       "fusarium wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-ocimum-basilicum-sweet"
   },
   {
     "species": "Ocimum basilicum",
@@ -137,7 +139,8 @@
     "commonDiseases": [
       "fusarium wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-ocimum-basilicum-thai"
   },
   {
     "species": "Ocimum basilicum",
@@ -188,7 +191,8 @@
     "commonDiseases": [
       "fusarium wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-ocimum-basilicum-purple"
   },
   {
     "species": "Coriandrum sativum",
@@ -225,7 +229,8 @@
     "commonDiseases": [
       "leaf spot",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-coriandrum-sativum"
   },
   {
     "species": "Coriandrum sativum",
@@ -275,7 +280,8 @@
     "commonDiseases": [
       "leaf spot",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-coriandrum-sativum-slow-bolt"
   },
   {
     "species": "Coriandrum sativum",
@@ -325,7 +331,8 @@
     "commonDiseases": [
       "leaf spot",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-coriandrum-sativum-santo"
   },
   {
     "species": "Petroselinum crispum",
@@ -364,7 +371,8 @@
     "commonDiseases": [
       "leaf spot",
       "crown rot"
-    ]
+    ],
+    "knowledgeId": "builtin-petroselinum-crispum"
   },
   {
     "species": "Petroselinum crispum",
@@ -416,7 +424,8 @@
     "commonDiseases": [
       "leaf spot",
       "crown rot"
-    ]
+    ],
+    "knowledgeId": "builtin-petroselinum-crispum-italian-flat-leaf"
   },
   {
     "species": "Petroselinum crispum",
@@ -468,7 +477,8 @@
     "commonDiseases": [
       "leaf spot",
       "crown rot"
-    ]
+    ],
+    "knowledgeId": "builtin-petroselinum-crispum-curly"
   },
   {
     "species": "Anethum graveolens",
@@ -504,7 +514,8 @@
     ],
     "commonDiseases": [
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-anethum-graveolens"
   },
   {
     "species": "Anethum graveolens",
@@ -553,7 +564,8 @@
     ],
     "commonDiseases": [
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-anethum-graveolens-bouquet"
   },
   {
     "species": "Mentha spp.",
@@ -590,7 +602,8 @@
     "commonDiseases": [
       "mint rust",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-mentha-spp"
   },
   {
     "species": "Mentha spp.",
@@ -640,7 +653,8 @@
     "commonDiseases": [
       "mint rust",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-mentha-spp-peppermint"
   },
   {
     "species": "Mentha spp.",
@@ -690,7 +704,8 @@
     "commonDiseases": [
       "mint rust",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-mentha-spp-spearmint"
   },
   {
     "species": "Salvia rosmarinus",
@@ -728,7 +743,8 @@
     "commonDiseases": [
       "root rot",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-salvia-rosmarinus"
   },
   {
     "species": "Salvia rosmarinus",
@@ -779,7 +795,8 @@
     "commonDiseases": [
       "root rot",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-salvia-rosmarinus-common"
   },
   {
     "species": "Thymus vulgaris",
@@ -812,7 +829,8 @@
     "commonDiseases": [
       "root rot",
       "gray mold"
-    ]
+    ],
+    "knowledgeId": "builtin-thymus-vulgaris"
   },
   {
     "species": "Thymus vulgaris",
@@ -858,7 +876,8 @@
     "commonDiseases": [
       "root rot",
       "gray mold"
-    ]
+    ],
+    "knowledgeId": "builtin-thymus-vulgaris-common"
   },
   {
     "species": "Origanum vulgare",
@@ -889,7 +908,8 @@
     "commonDiseases": [
       "root rot",
       "mint rust"
-    ]
+    ],
+    "knowledgeId": "builtin-origanum-vulgare"
   },
   {
     "species": "Salvia officinalis",
@@ -926,7 +946,8 @@
     "commonDiseases": [
       "powdery mildew",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-salvia-officinalis"
   },
   {
     "species": "Allium schoenoprasum",
@@ -962,7 +983,8 @@
     "commonDiseases": [
       "downy mildew",
       "rust"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-schoenoprasum"
   },
   {
     "species": "Lavandula angustifolia",
@@ -998,7 +1020,8 @@
     "commonDiseases": [
       "root rot",
       "leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-lavandula-angustifolia"
   },
   {
     "species": "Cymbopogon citratus",
@@ -1027,7 +1050,8 @@
     ],
     "commonDiseases": [
       "rust"
-    ]
+    ],
+    "knowledgeId": "builtin-cymbopogon-citratus"
   },
   {
     "species": "Artemisia dracunculus",
@@ -1057,7 +1081,8 @@
     "commonDiseases": [
       "root rot",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-artemisia-dracunculus"
   },
   {
     "species": "Foeniculum vulgare",
@@ -1092,7 +1117,8 @@
     "commonDiseases": [
       "cercospora leaf blight",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-foeniculum-vulgare"
   },
   {
     "species": "Matricaria chamomilla",
@@ -1124,6 +1150,7 @@
     "commonDiseases": [
       "powdery mildew",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-matricaria-chamomilla"
   }
 ]

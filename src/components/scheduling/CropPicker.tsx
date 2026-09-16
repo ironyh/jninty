@@ -99,7 +99,7 @@ export default function CropPicker({ onSelect, onClose }: CropPickerProps) {
       if (!selectedCrop) return;
       onSelect({
         cropId: selectedCrop.cropId,
-        varietyId: builtInEntryId(entry.species, entry.variety),
+        varietyId: builtInEntryId(entry),
         cropName: selectedCrop.cropName,
         varietyName: entry.variety ?? entry.commonName,
         cropSource: selectedCrop.cropSource,

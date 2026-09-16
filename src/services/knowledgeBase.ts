@@ -121,9 +121,11 @@ export function groupBySpecies(items: KnowledgeBaseItem[]): SpeciesGroup[] {
 // ─── Unified Knowledge Base API ───
 
 /**
- * Generate a deterministic ID for a built-in knowledge entry.
+ * Legacy derivation of a built-in entry id from its names.
+ * Superseded by stored `knowledgeId` values; kept for the initial-seed
+ * cohort tests and as a fallback for entries predating stored ids.
  */
-export function builtInEntryId(species: string, variety?: string): string {
+export function legacyEntryId(species: string, variety?: string): string {
   const slug = (s: string) =>
     s
       .toLowerCase()
@@ -132,6 +134,18 @@ export function builtInEntryId(species: string, variety?: string): string {
 
   const base = slug(species);
   return variety ? `builtin-${base}-${slug(variety)}` : `builtin-${base}`;
+}
+
+/**
+ * Stable identity for a built-in knowledge entry.
+ * Uses the stored, immutable `knowledgeId` when present and falls back to
+ * legacy name derivation otherwise. Never derive an id from names for an
+ * entry that has one stored — stored ids survive name corrections.
+ */
+export function builtInEntryId(
+  entry: Pick<PlantKnowledge, "species" | "variety" | "knowledgeId">,
+): string {
+  return entry.knowledgeId ?? legacyEntryId(entry.species, entry.variety);
 }
 
 /**
@@ -162,7 +176,7 @@ export function loadAllKnowledgeItems(
   const builtIn = loadKnowledgeBase();
 
   const builtInItems: KnowledgeBaseItem[] = builtIn.map((data) => ({
-    id: builtInEntryId(data.species, data.variety),
+    id: builtInEntryId(data),
     source: "builtin" as const,
     data,
   }));
@@ -185,7 +199,7 @@ export function findKnowledgeItemById(
   if (id.startsWith("builtin-")) {
     const builtIn = loadKnowledgeBase();
     const entry = builtIn.find(
-      (p) => builtInEntryId(p.species, p.variety) === id,
+      (p) => builtInEntryId(p) === id,
     );
     if (!entry) return undefined;
     return { id, source: "builtin", data: entry };
@@ -321,7 +335,7 @@ export function buildSchedulableSearchIndex(): void {
   const map = new Map<string, SchedulablePlant>();
 
   for (const entry of entries) {
-    const id = builtInEntryId(entry.species, entry.variety);
+    const id = builtInEntryId(entry);
     docs.push({
       id,
       commonName: entry.commonName,

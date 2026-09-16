@@ -35,7 +35,8 @@
       "gray mold",
       "powdery mildew",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-fragaria-ananassa"
   },
   {
     "species": "Fragaria × ananassa",
@@ -86,7 +87,8 @@
       "gray mold",
       "powdery mildew",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-fragaria-ananassa-earliglow"
   },
   {
     "species": "Fragaria × ananassa",
@@ -137,7 +139,8 @@
       "gray mold",
       "powdery mildew",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-fragaria-ananassa-ozark-beauty"
   },
   {
     "species": "Fragaria × ananassa",
@@ -188,7 +191,8 @@
       "gray mold",
       "powdery mildew",
       "verticillium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-fragaria-ananassa-albion"
   },
   {
     "species": "Vaccinium corymbosum",
@@ -225,7 +229,8 @@
       "mummy berry",
       "phomopsis",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-vaccinium-corymbosum"
   },
   {
     "species": "Vaccinium corymbosum",
@@ -275,7 +280,8 @@
       "mummy berry",
       "phomopsis",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-vaccinium-corymbosum-bluecrop"
   },
   {
     "species": "Vaccinium corymbosum",
@@ -325,7 +331,8 @@
       "mummy berry",
       "phomopsis",
       "botrytis"
-    ]
+    ],
+    "knowledgeId": "builtin-vaccinium-corymbosum-duke"
   },
   {
     "species": "Rubus idaeus",
@@ -362,7 +369,8 @@
       "anthracnose",
       "gray mold",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-rubus-idaeus"
   },
   {
     "species": "Rubus idaeus",
@@ -412,7 +420,8 @@
       "anthracnose",
       "gray mold",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-rubus-idaeus-heritage"
   },
   {
     "species": "Rubus idaeus",
@@ -462,7 +471,8 @@
       "anthracnose",
       "gray mold",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-rubus-idaeus-latham"
   },
   {
     "species": "Rubus fruticosus",
@@ -498,7 +508,8 @@
       "anthracnose",
       "orange rust",
       "double blossom"
-    ]
+    ],
+    "knowledgeId": "builtin-rubus-fruticosus"
   },
   {
     "species": "Malus domestica",
@@ -535,7 +546,8 @@
       "apple scab",
       "fire blight",
       "cedar apple rust"
-    ]
+    ],
+    "knowledgeId": "builtin-malus-domestica"
   },
   {
     "species": "Prunus persica",
@@ -571,7 +583,8 @@
       "peach leaf curl",
       "brown rot",
       "bacterial spot"
-    ]
+    ],
+    "knowledgeId": "builtin-prunus-persica"
   },
   {
     "species": "Prunus avium",
@@ -607,7 +620,8 @@
       "brown rot",
       "bacterial canker",
       "cherry leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-prunus-avium"
   },
   {
     "species": "Ficus carica",
@@ -642,7 +656,8 @@
       "fig rust",
       "leaf blight",
       "root knot nematode"
-    ]
+    ],
+    "knowledgeId": "builtin-ficus-carica"
   },
   {
     "species": "Vitis vinifera",
@@ -678,7 +693,8 @@
       "powdery mildew",
       "downy mildew",
       "black rot"
-    ]
+    ],
+    "knowledgeId": "builtin-vitis-vinifera"
   },
   {
     "species": "Citrus limon",
@@ -713,6 +729,7 @@
       "citrus canker",
       "citrus greening",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-citrus-limon"
   }
 ]

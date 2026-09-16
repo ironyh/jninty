@@ -417,7 +417,7 @@ export default function KnowledgeDetailPage() {
         {/* Related Varieties */}
         {(() => {
           const siblings = getCropGroup(data.cropGroup).filter(
-            (s) => builtInEntryId(s.species, s.variety) !== id,
+            (s) => builtInEntryId(s) !== id,
           );
           if (siblings.length === 0) return null;
           return (
@@ -428,8 +428,8 @@ export default function KnowledgeDetailPage() {
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {siblings.map((s) => (
                   <Link
-                    key={builtInEntryId(s.species, s.variety)}
-                    to={`/knowledge/${builtInEntryId(s.species, s.variety)}`}
+                    key={builtInEntryId(s)}
+                    to={`/knowledge/${builtInEntryId(s)}`}
                   >
                     <Badge variant="default">
                       {s.variety ?? s.commonName}

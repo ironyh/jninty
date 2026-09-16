@@ -46,7 +46,7 @@ function lookupSchedulingFields(
   // cropId is the cropGroup, varietyId is the builtInEntryId
   const entries = getCropGroup(cropId);
   const entry = entries.find(
-    (e) => builtInEntryId(e.species, e.variety) === varietyId,
+    (e) => builtInEntryId(e) === varietyId,
   );
   if (!entry?.scheduling) return undefined;
 

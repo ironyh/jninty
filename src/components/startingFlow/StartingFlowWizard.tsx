@@ -118,7 +118,7 @@ export default function StartingFlowWizard({
       const fields = extractSchedulingFields(entry);
       setState((prev) => ({
         ...prev,
-        varietyId: builtInEntryId(entry.species, entry.variety),
+        varietyId: builtInEntryId(entry),
         varietyName: entry.variety ?? entry.commonName,
         schedulingFields: fields,
       }));
@@ -132,7 +132,7 @@ export default function StartingFlowWizard({
       // Re-lookup the entry from the knowledge base
       const entries = getCropGroup(state.cropId);
       const entry = entries.find(
-        (e) => builtInEntryId(e.species, e.variety) === state.varietyId,
+        (e) => builtInEntryId(e) === state.varietyId,
       );
       const fields = entry ? extractSchedulingFields(entry) : state.schedulingFields;
       if (!fields) return;

@@ -53,7 +53,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-cherry"
   },
   {
     "species": "Solanum lycopersicum",
@@ -109,7 +110,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-beefsteak"
   },
   {
     "species": "Solanum lycopersicum",
@@ -165,7 +167,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-roma"
   },
   {
     "species": "Capsicum annuum",
@@ -218,7 +221,8 @@
       "bacterial leaf spot",
       "phytophthora blight",
       "blossom end rot"
-    ]
+    ],
+    "knowledgeId": "builtin-capsicum-annuum-bell"
   },
   {
     "species": "Cucumis sativus",
@@ -262,7 +266,8 @@
       "downy mildew",
       "bacterial wilt",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-cucumis-sativus"
   },
   {
     "species": "Cucumis sativus",
@@ -319,7 +324,8 @@
       "downy mildew",
       "bacterial wilt",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-cucumis-sativus-slicing"
   },
   {
     "species": "Cucumis sativus",
@@ -376,7 +382,8 @@
       "downy mildew",
       "bacterial wilt",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-cucumis-sativus-pickling"
   },
   {
     "species": "Cucumis sativus",
@@ -433,7 +440,8 @@
       "downy mildew",
       "bacterial wilt",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-cucumis-sativus-english"
   },
   {
     "species": "Lactuca sativa",
@@ -473,7 +481,8 @@
       "lettuce drop",
       "tip burn",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-lactuca-sativa"
   },
   {
     "species": "Lactuca sativa",
@@ -526,7 +535,8 @@
       "lettuce drop",
       "tip burn",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-lactuca-sativa-butterhead"
   },
   {
     "species": "Lactuca sativa",
@@ -579,7 +589,8 @@
       "lettuce drop",
       "tip burn",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-lactuca-sativa-romaine"
   },
   {
     "species": "Lactuca sativa",
@@ -632,7 +643,8 @@
       "lettuce drop",
       "tip burn",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-lactuca-sativa-iceberg"
   },
   {
     "species": "Lactuca sativa",
@@ -685,7 +697,8 @@
       "lettuce drop",
       "tip burn",
       "mosaic virus"
-    ]
+    ],
+    "knowledgeId": "builtin-lactuca-sativa-red-leaf"
   },
   {
     "species": "Daucus carota",
@@ -725,7 +738,8 @@
       "alternaria leaf blight",
       "cavity spot",
       "aster yellows"
-    ]
+    ],
+    "knowledgeId": "builtin-daucus-carota"
   },
   {
     "species": "Daucus carota",
@@ -778,7 +792,8 @@
       "alternaria leaf blight",
       "cavity spot",
       "aster yellows"
-    ]
+    ],
+    "knowledgeId": "builtin-daucus-carota-nantes"
   },
   {
     "species": "Daucus carota",
@@ -831,7 +846,8 @@
       "alternaria leaf blight",
       "cavity spot",
       "aster yellows"
-    ]
+    ],
+    "knowledgeId": "builtin-daucus-carota-danvers"
   },
   {
     "species": "Daucus carota",
@@ -884,7 +900,8 @@
       "alternaria leaf blight",
       "cavity spot",
       "aster yellows"
-    ]
+    ],
+    "knowledgeId": "builtin-daucus-carota-chantenay"
   },
   {
     "species": "Allium cepa",
@@ -926,7 +943,8 @@
       "botrytis neck rot",
       "pink root",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-cepa"
   },
   {
     "species": "Allium cepa",
@@ -981,7 +999,8 @@
       "botrytis neck rot",
       "pink root",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-cepa-yellow"
   },
   {
     "species": "Allium cepa",
@@ -1036,7 +1055,8 @@
       "botrytis neck rot",
       "pink root",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-cepa-red"
   },
   {
     "species": "Allium cepa",
@@ -1091,7 +1111,8 @@
       "botrytis neck rot",
       "pink root",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-cepa-white"
   },
   {
     "species": "Allium sativum",
@@ -1132,7 +1153,8 @@
       "downy mildew",
       "rust",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-sativum"
   },
   {
     "species": "Allium sativum",
@@ -1186,7 +1208,8 @@
       "downy mildew",
       "rust",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-sativum-softneck"
   },
   {
     "species": "Allium sativum",
@@ -1240,7 +1263,8 @@
       "downy mildew",
       "rust",
       "fusarium basal rot"
-    ]
+    ],
+    "knowledgeId": "builtin-allium-sativum-hardneck"
   },
   {
     "species": "Phaseolus vulgaris",
@@ -1295,7 +1319,8 @@
       "bacterial blight",
       "white mold",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-phaseolus-vulgaris-bush"
   },
   {
     "species": "Pisum sativum",
@@ -1348,7 +1373,8 @@
       "fusarium wilt",
       "root rot",
       "pea enation mosaic"
-    ]
+    ],
+    "knowledgeId": "builtin-pisum-sativum-sugar-snap"
   },
   {
     "species": "Cucurbita moschata",
@@ -1390,7 +1416,8 @@
       "downy mildew",
       "bacterial wilt",
       "blossom end rot"
-    ]
+    ],
+    "knowledgeId": "builtin-cucurbita-moschata-butternut"
   },
   {
     "species": "Cucurbita pepo",
@@ -1432,7 +1459,8 @@
       "blossom end rot",
       "bacterial wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-cucurbita-pepo"
   },
   {
     "species": "Cucurbita pepo",
@@ -1487,7 +1515,8 @@
       "blossom end rot",
       "bacterial wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-cucurbita-pepo-black-beauty"
   },
   {
     "species": "Cucurbita pepo",
@@ -1542,7 +1571,8 @@
       "blossom end rot",
       "bacterial wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-cucurbita-pepo-golden"
   },
   {
     "species": "Brassica oleracea var. italica",
@@ -1585,7 +1615,8 @@
       "downy mildew",
       "black rot",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-italica"
   },
   {
     "species": "Brassica oleracea var. italica",
@@ -1641,7 +1672,8 @@
       "downy mildew",
       "black rot",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-italica-calabrese"
   },
   {
     "species": "Brassica oleracea var. italica",
@@ -1697,7 +1729,8 @@
       "downy mildew",
       "black rot",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-italica-de-cicco"
   },
   {
     "species": "Brassica oleracea var. botrytis",
@@ -1739,7 +1772,8 @@
       "downy mildew",
       "black rot",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-botrytis"
   },
   {
     "species": "Brassica oleracea var. capitata",
@@ -1781,7 +1815,8 @@
       "black rot",
       "fusarium yellows",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-capitata"
   },
   {
     "species": "Brassica oleracea var. sabellica",
@@ -1825,7 +1860,8 @@
       "downy mildew",
       "black rot",
       "alternaria leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-sabellica"
   },
   {
     "species": "Brassica oleracea var. sabellica",
@@ -1882,7 +1918,8 @@
       "downy mildew",
       "black rot",
       "alternaria leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-sabellica-curly"
   },
   {
     "species": "Brassica oleracea var. sabellica",
@@ -1939,7 +1976,8 @@
       "downy mildew",
       "black rot",
       "alternaria leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-sabellica-lacinato"
   },
   {
     "species": "Spinacia oleracea",
@@ -1975,7 +2013,8 @@
       "fusarium wilt",
       "white rust",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-spinacia-oleracea"
   },
   {
     "species": "Spinacia oleracea",
@@ -2024,7 +2063,8 @@
       "fusarium wilt",
       "white rust",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-spinacia-oleracea-bloomsdale"
   },
   {
     "species": "Spinacia oleracea",
@@ -2073,7 +2113,8 @@
       "fusarium wilt",
       "white rust",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-spinacia-oleracea-space"
   },
   {
     "species": "Raphanus sativus",
@@ -2110,7 +2151,8 @@
       "clubroot",
       "downy mildew",
       "black root"
-    ]
+    ],
+    "knowledgeId": "builtin-raphanus-sativus"
   },
   {
     "species": "Beta vulgaris",
@@ -2147,7 +2189,8 @@
       "cercospora leaf spot",
       "downy mildew",
       "root rot"
-    ]
+    ],
+    "knowledgeId": "builtin-beta-vulgaris"
   },
   {
     "species": "Zea mays",
@@ -2200,7 +2243,8 @@
       "northern corn leaf blight",
       "smut",
       "stewarts wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-zea-mays"
   },
   {
     "species": "Solanum tuberosum",
@@ -2243,7 +2287,8 @@
       "early blight",
       "scab",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-tuberosum"
   },
   {
     "species": "Solanum tuberosum",
@@ -2299,7 +2344,8 @@
       "early blight",
       "scab",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-tuberosum-russet"
   },
   {
     "species": "Solanum tuberosum",
@@ -2355,7 +2401,8 @@
       "early blight",
       "scab",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-tuberosum-red"
   },
   {
     "species": "Solanum tuberosum",
@@ -2411,7 +2458,8 @@
       "early blight",
       "scab",
       "blackleg"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-tuberosum-yukon-gold"
   },
   {
     "species": "Ipomoea batatas",
@@ -2449,7 +2497,8 @@
       "black rot",
       "scurf",
       "stem rot"
-    ]
+    ],
+    "knowledgeId": "builtin-ipomoea-batatas"
   },
   {
     "species": "Solanum melongena",
@@ -2489,7 +2538,8 @@
       "phytophthora blight",
       "early blight",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-melongena"
   },
   {
     "species": "Apium graveolens",
@@ -2530,7 +2580,8 @@
       "late blight",
       "fusarium yellows",
       "pink rot"
-    ]
+    ],
+    "knowledgeId": "builtin-apium-graveolens"
   },
   {
     "species": "Asparagus officinalis",
@@ -2569,7 +2620,8 @@
       "asparagus rust",
       "purple spot",
       "cercospora leaf spot"
-    ]
+    ],
+    "knowledgeId": "builtin-asparagus-officinalis"
   },
   {
     "species": "Cucurbita maxima",
@@ -2610,7 +2662,8 @@
       "downy mildew",
       "bacterial wilt",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-cucurbita-maxima"
   },
   {
     "species": "Citrullus lanatus",
@@ -2651,7 +2704,8 @@
       "anthracnose",
       "gummy stem blight",
       "powdery mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-citrullus-lanatus"
   },
   {
     "species": "Cucumis melo",
@@ -2692,7 +2746,8 @@
       "fusarium wilt",
       "bacterial wilt",
       "downy mildew"
-    ]
+    ],
+    "knowledgeId": "builtin-cucumis-melo"
   },
   {
     "species": "Abelmoschus esculentus",
@@ -2729,7 +2784,8 @@
       "verticillium wilt",
       "powdery mildew",
       "root-knot nematode"
-    ]
+    ],
+    "knowledgeId": "builtin-abelmoschus-esculentus"
   },
   {
     "species": "Brassica oleracea var. gemmifera",
@@ -2771,7 +2827,8 @@
       "downy mildew",
       "black rot",
       "ring spot"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-oleracea-var-gemmifera"
   },
   {
     "species": "Brassica rapa",
@@ -2808,7 +2865,8 @@
       "downy mildew",
       "white rust",
       "black rot"
-    ]
+    ],
+    "knowledgeId": "builtin-brassica-rapa"
   },
   {
     "species": "Solanum lycopersicum",
@@ -2864,7 +2922,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-brandywine"
   },
   {
     "species": "Solanum lycopersicum",
@@ -2920,7 +2979,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-sun-gold"
   },
   {
     "species": "Solanum lycopersicum",
@@ -2976,7 +3036,8 @@
       "late blight",
       "blossom end rot",
       "fusarium wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-solanum-lycopersicum-san-marzano"
   },
   {
     "species": "Capsicum annuum",
@@ -3029,7 +3090,8 @@
       "bacterial leaf spot",
       "phytophthora blight",
       "blossom end rot"
-    ]
+    ],
+    "knowledgeId": "builtin-capsicum-annuum-jalapeno"
   },
   {
     "species": "Capsicum annuum",
@@ -3082,7 +3144,8 @@
       "bacterial leaf spot",
       "phytophthora blight",
       "blossom end rot"
-    ]
+    ],
+    "knowledgeId": "builtin-capsicum-annuum-habanero"
   },
   {
     "species": "Capsicum annuum",
@@ -3135,7 +3198,8 @@
       "bacterial leaf spot",
       "phytophthora blight",
       "blossom end rot"
-    ]
+    ],
+    "knowledgeId": "builtin-capsicum-annuum-banana"
   },
   {
     "species": "Phaseolus vulgaris",
@@ -3190,7 +3254,8 @@
       "bacterial blight",
       "white mold",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-phaseolus-vulgaris-pole"
   },
   {
     "species": "Phaseolus vulgaris",
@@ -3245,7 +3310,8 @@
       "bacterial blight",
       "white mold",
       "anthracnose"
-    ]
+    ],
+    "knowledgeId": "builtin-phaseolus-vulgaris-lima"
   },
   {
     "species": "Pisum sativum",
@@ -3298,7 +3364,8 @@
       "fusarium wilt",
       "root rot",
       "pea enation mosaic"
-    ]
+    ],
+    "knowledgeId": "builtin-pisum-sativum-snow"
   },
   {
     "species": "Zea mays",
@@ -3352,6 +3419,7 @@
       "northern corn leaf blight",
       "smut",
       "stewarts wilt"
-    ]
+    ],
+    "knowledgeId": "builtin-zea-mays-popcorn"
   }
 ]

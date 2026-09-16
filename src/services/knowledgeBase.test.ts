@@ -5,7 +5,7 @@ import {
   getBySpecies,
   getCompanions,
   clearKnowledgeBaseCache,
-  builtInEntryId,
+  legacyEntryId,
   loadAllKnowledgeItems,
   findKnowledgeItemById,
   groupBySpecies,
@@ -126,25 +126,25 @@ const mockUserEntry: UserPlantKnowledge = {
   waterNeeds: "moderate",
 };
 
-describe("builtInEntryId", () => {
+describe("legacyEntryId", () => {
   it("generates deterministic id from species", () => {
-    const id = builtInEntryId("Solanum lycopersicum");
+    const id = legacyEntryId("Solanum lycopersicum");
     expect(id).toBe("builtin-solanum-lycopersicum");
   });
 
   it("includes variety in id when provided", () => {
-    const id = builtInEntryId("Solanum lycopersicum", "Cherry");
+    const id = legacyEntryId("Solanum lycopersicum", "Cherry");
     expect(id).toBe("builtin-solanum-lycopersicum-cherry");
   });
 
   it("normalizes special characters", () => {
-    const id = builtInEntryId("Some & Special  Plant");
+    const id = legacyEntryId("Some & Special  Plant");
     expect(id).toBe("builtin-some-special-plant");
   });
 
   it("returns same id for same input", () => {
-    const a = builtInEntryId("Ocimum basilicum");
-    const b = builtInEntryId("Ocimum basilicum");
+    const a = legacyEntryId("Ocimum basilicum");
+    const b = legacyEntryId("Ocimum basilicum");
     expect(a).toBe(b);
   });
 });
@@ -189,7 +189,7 @@ describe("loadAllKnowledgeItems", () => {
 
 describe("findKnowledgeItemById", () => {
   it("finds a built-in item by id", () => {
-    const id = builtInEntryId("Solanum lycopersicum", "Cherry");
+    const id = legacyEntryId("Solanum lycopersicum", "Cherry");
     const item = findKnowledgeItemById(id, []);
     expect(item).toBeDefined();
     expect(item?.source).toBe("builtin");

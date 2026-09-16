@@ -42,7 +42,7 @@ export default function VarietySelector({
 
       <ul className="mt-2 space-y-1">
         {entries.map((entry) => (
-          <li key={builtInEntryId(entry.species, entry.variety)}>
+          <li key={builtInEntryId(entry)}>
             <button
               type="button"
               onClick={() => onSelect(entry)}
