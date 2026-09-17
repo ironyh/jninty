@@ -3,6 +3,7 @@ import { plantKnowledgeSchema } from "../validation/plantKnowledge.schema.ts";
 import type { PlantKnowledge } from "../validation/plantKnowledge.schema.ts";
 import type { UserPlantKnowledge } from "../validation/userPlantKnowledge.schema.ts";
 import type { KnowledgeBaseItem, SchedulablePlant, SpeciesGroup } from "./knowledgeBaseTypes.ts";
+import { matchTaxonomyAliases } from "./taxonomyAliases.ts";
 import { z } from "zod";
 
 import vegetablesData from "../../data/plants/vegetables.json";
@@ -40,17 +41,47 @@ export function loadKnowledgeBase(): PlantKnowledge[] {
 /**
  * Searches the knowledge base by species, variety, or common name.
  * Case-insensitive substring match.
+ *
+ * Additionally matches safe taxonomy-derived aliases (Swedish names,
+ * scientific synonyms/accepted-name variants) from the committed
+ * data/taxonomy/taxonomy.json artifact. Current-field matches always come
+ * first; alias matches are purely additive and ordered by match strength.
+ * Builtin-only by design — Knowledge Hub search covers custom entries, and
+ * its alias integration is a separate follow-up.
  */
 export function searchKnowledge(query: string): PlantKnowledge[] {
   const plants = loadKnowledgeBase();
   const q = query.toLowerCase();
 
-  return plants.filter(
+  const current = plants.filter(
     (p) =>
       p.species.toLowerCase().includes(q) ||
       p.commonName.toLowerCase().includes(q) ||
       (p.variety && p.variety.toLowerCase().includes(q)),
   );
+
+  // Taxonomy-derived alias expansion: additive only. If the alias data is
+  // unavailable or malformed this list stays empty and the result
+  // degenerates to the original search above.
+  const aliasMatches: PlantKnowledge[] = [];
+  try {
+    const aliasSpecies = matchTaxonomyAliases(query);
+    if (aliasSpecies.length > 0) {
+      const currentSet = new Set(current);
+      for (const species of aliasSpecies) {
+        const key = species.toLowerCase();
+        for (const p of plants) {
+          if (p.species.toLowerCase() === key && !currentSet.has(p)) {
+            aliasMatches.push(p);
+          }
+        }
+      }
+    }
+  } catch {
+    // taxonomy enrichment must never break search
+  }
+
+  return [...current, ...aliasMatches];
 }
 
 /**
