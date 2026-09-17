@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "note": "Pinned source snapshots used to generate taxonomy.json. Updated only by the explicit maintainer refresh workflow. Verify checksums after every refresh.",
+  "wfo": {
+    "release": "World Flora Online Plant List June 2026 (version 2026-06)",
+    "doi": "10.5281/zenodo.20782718",
+    "conceptDoi": "10.5281/zenodo.7460141",
+    "releaseUrl": "https://zenodo.org/records/20782718",
+    "fileUrl": "https://zenodo.org/api/records/20782718/files/_DwC_backbone_R.zip/content",
+    "file": "wfo-plantlist-2026-06_DwC_backbone_R.zip",
+    "recordMd5": "0e4486945cd9f7af548ca87eb9a870ed",
+    "sha256": "ccfc7e3ca85c8b80aa96eb52d4e50e07e1811d28916b544280d8a4f1a043ba72",
+    "retrievedAt": "2026-09-17",
+    "publicationDate": "2026-06-21",
+    "license": "CC0 1.0 — Zenodo record 10.5281/zenodo.20782718 license id: cc-zero",
+    "upgradeNote": "Advance this pin to the next WFO Plant List release (published ~every six months; see https://wfoplantlist.org/classifications) by updating release/doi/url/file/checksums here — no code change required."
+  },
+  "dyntaxa": {
+    "dataset": "Dyntaxa. Svensk taxonomisk databas (SLU Artdatabanken)",
+    "datasetKey": "de8934f4-a136-481c-a87a-b0b202b80a31",
+    "datasetDoi": "10.15468/j43wfc",
+    "datasetLicense": "CC0 1.0 (GBIF-published dataset license field, retrieved 2026-09-17)",
+    "sourceUrl": "https://api.artdatabanken.se/taxonservice/v1/DarwinCore/Download (official DwC-A endpoint as published in the GBIF registry)",
+    "file": "dyntaxa-dwca.zip",
+    "sha256": "e92bb589da42e83f7c0771a6536392d024e6fc66da2b996399c10386f93fe00f",
+    "retrievedAt": "2026-09-17",
+    "publicationDate": "2026-09-10",
+    "snapshotContentDate": "2026-09-14 (archive entry dates)"
+  }
+}

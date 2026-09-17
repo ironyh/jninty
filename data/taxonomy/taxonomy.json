@@ -1,0 +1,2548 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-17T09:04:15.940Z",
+  "resolver": {
+    "name": "jninty-taxonomy-pipeline",
+    "version": "1.0.0"
+  },
+  "inputs": {
+    "jnintySpeciesSource": "data/plants/*.json (authored strings, byte-for-byte)",
+    "wfo": {
+      "release": "World Flora Online Plant List June 2026 (version 2026-06)",
+      "releaseUrl": "https://zenodo.org/records/20782718",
+      "sha256": "ccfc7e3ca85c8b80aa96eb52d4e50e07e1811d28916b544280d8a4f1a043ba72",
+      "retrievedAt": "2026-09-17",
+      "license": "CC0 1.0 — Zenodo record 10.5281/zenodo.20782718 license id: cc-zero"
+    },
+    "dyntaxa": {
+      "dataset": "Dyntaxa. Svensk taxonomisk databas (SLU Artdatabanken)",
+      "datasetKey": "de8934f4-a136-481c-a87a-b0b202b80a31",
+      "datasetDoi": "10.15468/j43wfc",
+      "license": "CC0 1.0 (GBIF-published dataset license field, retrieved 2026-09-17)",
+      "sha256": "e92bb589da42e83f7c0771a6536392d024e6fc66da2b996399c10386f93fe00f",
+      "retrievedAt": "2026-09-17"
+    },
+    "overrides": {
+      "file": "data/taxonomy/overrides.json",
+      "schemaVersion": 1
+    }
+  },
+  "overridesApplied": [
+    "Salvia rosmarinus"
+  ],
+  "summary": {
+    "totalSpecies": 69,
+    "wfoMatchTypes": {
+      "accepted": 60,
+      "genus-only": 4,
+      "ambiguous": 5
+    },
+    "dyntaxaMatchTypes": {
+      "absent": 7,
+      "exact": 57,
+      "genus-level": 4,
+      "manual": 1
+    },
+    "reviewStatuses": {
+      "needs-review": 19,
+      "clean": 49,
+      "manual-override": 1
+    },
+    "swedishNameCoverage": 62
+  },
+  "taxa": [
+    {
+      "jnintySpecies": "Abelmoschus esculentus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000510862",
+        "matchedName": "Abelmoschus esculentus",
+        "acceptedName": "Abelmoschus esculentus",
+        "acceptedWfoId": "wfo-0000510862",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Allium cepa",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000755919",
+        "matchedName": "Allium cepa",
+        "acceptedName": "Allium cepa",
+        "acceptedWfoId": "wfo-0000755919",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:219736",
+        "scientificName": "Allium cepa",
+        "canonicalName": "allium cepa",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "lök",
+        "otherSwedishNames": [
+          "lök"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Allium sativum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000757248",
+        "matchedName": "Allium sativum",
+        "acceptedName": "Allium sativum",
+        "acceptedWfoId": "wfo-0000757248",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:232977",
+        "scientificName": "Allium sativum",
+        "canonicalName": "allium sativum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "vitlök",
+        "otherSwedishNames": [
+          "vitlök"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Allium schoenoprasum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000757278",
+        "matchedName": "Allium schoenoprasum",
+        "acceptedName": "Allium schoenoprasum",
+        "acceptedWfoId": "wfo-0000757278",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:219751",
+        "scientificName": "Allium schoenoprasum",
+        "canonicalName": "allium schoenoprasum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "gräslök",
+        "otherSwedishNames": [
+          "gräslök"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Anethum graveolens",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000536042",
+        "matchedName": "Anethum graveolens",
+        "acceptedName": "Anethum graveolens",
+        "acceptedWfoId": "wfo-0000536042",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": [
+          "wfo-0000536043 Anethum graveolens -> wfo-0000402206"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222788",
+        "scientificName": "Anethum graveolens",
+        "canonicalName": "anethum graveolens",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "dill",
+        "otherSwedishNames": [
+          "dill"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO backbone conflict: wfo-0000536043 Anethum graveolens -> wfo-0000402206"
+        ],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000536042)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Apium graveolens",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000540626",
+        "matchedName": "Apium graveolens",
+        "acceptedName": "Apium graveolens",
+        "acceptedWfoId": "wfo-0000540626",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:78",
+        "scientificName": "Apium graveolens",
+        "canonicalName": "apium graveolens",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "selleri",
+        "otherSwedishNames": [
+          "selleri"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Artemisia dracunculus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000078900",
+        "matchedName": "Artemisia dracunculus",
+        "acceptedName": "Artemisia dracunculus",
+        "acceptedWfoId": "wfo-0000078900",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:219964",
+        "scientificName": "Artemisia dracunculus",
+        "canonicalName": "artemisia dracunculus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "dragon",
+        "otherSwedishNames": [
+          "dragon"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "2 backbone row(s) share this canonical name (accepted: wfo-0000078900)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Asparagus officinalis",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000634022",
+        "matchedName": "Asparagus officinalis",
+        "acceptedName": "Asparagus officinalis",
+        "acceptedWfoId": "wfo-0000634022",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222176",
+        "scientificName": "Asparagus officinalis",
+        "canonicalName": "asparagus officinalis",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "sparris",
+        "otherSwedishNames": [
+          "Asparagus",
+          "Vanlig sparris",
+          "sparris"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Beta vulgaris",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000564998",
+        "matchedName": "Beta vulgaris",
+        "acceptedName": "Beta vulgaris",
+        "acceptedWfoId": "wfo-0000564998",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220681",
+        "scientificName": "Beta vulgaris",
+        "canonicalName": "beta vulgaris",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "beta",
+        "otherSwedishNames": [
+          "beta"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica oleracea var. botrytis",
+      "speciesKind": "infraspecific",
+      "wfo": {
+        "id": "wfo-0000571367",
+        "matchedName": "Brassica oleracea var. botrytis",
+        "acceptedName": "Brassica oleracea var. botrytis",
+        "acceptedWfoId": "wfo-0000571367",
+        "status": "Accepted",
+        "rank": "variety",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica oleracea var. capitata",
+      "speciesKind": "infraspecific",
+      "wfo": {
+        "id": "wfo-0000571369",
+        "matchedName": "Brassica oleracea var. capitata",
+        "acceptedName": "Brassica oleracea var. capitata",
+        "acceptedWfoId": "wfo-0000571369",
+        "status": "Accepted",
+        "rank": "variety",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223820",
+        "scientificName": "Brassica oleracea var. capitata",
+        "canonicalName": "brassica oleracea var. capitata",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "variety",
+        "matchType": "exact",
+        "recommendedSwedishName": "huvudkål",
+        "otherSwedishNames": [
+          "huvudkål",
+          "vitkål"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica oleracea var. gemmifera",
+      "speciesKind": "infraspecific",
+      "wfo": {
+        "id": "wfo-0000571393",
+        "matchedName": "Brassica oleracea var. gemmifera",
+        "acceptedName": "Brassica oleracea var. gemmifera",
+        "acceptedWfoId": "wfo-0000571393",
+        "status": "Accepted",
+        "rank": "variety",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica oleracea var. italica",
+      "speciesKind": "infraspecific",
+      "wfo": {
+        "id": "wfo-0000571404",
+        "matchedName": "Brassica oleracea var. italica",
+        "acceptedName": "Brassica oleracea var. italica",
+        "acceptedWfoId": "wfo-0000571404",
+        "status": "Accepted",
+        "rank": "variety",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:264644",
+        "scientificName": "Brassica oleracea var. italica",
+        "canonicalName": "brassica oleracea var. italica",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "variety",
+        "matchType": "exact",
+        "recommendedSwedishName": "broccoli",
+        "otherSwedishNames": [
+          "broccoli"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica oleracea var. sabellica",
+      "speciesKind": "infraspecific",
+      "wfo": {
+        "id": "wfo-0000571452",
+        "matchedName": "Brassica oleracea var. sabellica",
+        "acceptedName": "Brassica oleracea var. sabellica",
+        "acceptedWfoId": "wfo-0000571452",
+        "status": "Accepted",
+        "rank": "variety",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223824",
+        "scientificName": "Brassica oleracea var. sabellica",
+        "canonicalName": "brassica oleracea var. sabellica",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "variety",
+        "matchType": "exact",
+        "recommendedSwedishName": "grönkål",
+        "otherSwedishNames": [
+          "grönkål",
+          "prydnadskål"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Brassica rapa",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000571544",
+        "matchedName": "Brassica rapa",
+        "acceptedName": "Brassica rapa",
+        "acceptedWfoId": "wfo-0000571544",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220443",
+        "scientificName": "Brassica rapa",
+        "canonicalName": "brassica rapa",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "rova/rybs/åkerkål",
+        "otherSwedishNames": [
+          "rova/rybs/åkerkål"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Capsicum annuum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001019982",
+        "matchedName": "Capsicum annuum",
+        "acceptedName": "Capsicum annuum",
+        "acceptedWfoId": "wfo-0001019982",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220458",
+        "scientificName": "Capsicum annuum",
+        "canonicalName": "capsicum annuum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "spanskpeppar",
+        "otherSwedishNames": [
+          "paprika",
+          "spansk peppar",
+          "spanskpeppar"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Citrullus lanatus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000607858",
+        "matchedName": "Citrullus lanatus",
+        "acceptedName": "Citrullus lanatus",
+        "acceptedWfoId": "wfo-0000607858",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221000",
+        "scientificName": "Citrullus lanatus",
+        "canonicalName": "citrullus lanatus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "vattenmelon",
+        "otherSwedishNames": [
+          "vattenmelon"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000607858)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Citrus limon",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001133139",
+        "matchedName": "Citrus limon",
+        "acceptedName": "Citrus limon",
+        "acceptedWfoId": "wfo-0001133139",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221001",
+        "scientificName": "Citrus limon",
+        "canonicalName": "citrus limon",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "citron",
+        "otherSwedishNames": [
+          "citron"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Coriandrum sativum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000621274",
+        "matchedName": "Coriandrum sativum",
+        "acceptedName": "Coriandrum sativum",
+        "acceptedWfoId": "wfo-0000621274",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220096",
+        "scientificName": "Coriandrum sativum",
+        "canonicalName": "coriandrum sativum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "koriander",
+        "otherSwedishNames": [
+          "koriander"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cosmos bipinnatus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000066682",
+        "matchedName": "Cosmos bipinnatus",
+        "acceptedName": "Cosmos bipinnatus",
+        "acceptedWfoId": "wfo-0000066682",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222397",
+        "scientificName": "Cosmos bipinnatus",
+        "canonicalName": "cosmos bipinnatus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "rosenskära",
+        "otherSwedishNames": [
+          "rosenskära"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cucumis melo",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000628914",
+        "matchedName": "Cucumis melo",
+        "acceptedName": "Cucumis melo",
+        "acceptedWfoId": "wfo-0000628914",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222145",
+        "scientificName": "Cucumis melo",
+        "canonicalName": "cucumis melo",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "melon",
+        "otherSwedishNames": [
+          "melon"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cucumis sativus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000628992",
+        "matchedName": "Cucumis sativus",
+        "acceptedName": "Cucumis sativus",
+        "acceptedWfoId": "wfo-0000628992",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221004",
+        "scientificName": "Cucumis sativus",
+        "canonicalName": "cucumis sativus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "gurka",
+        "otherSwedishNames": [
+          "gurka"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cucurbita maxima",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000629095",
+        "matchedName": "Cucurbita maxima",
+        "acceptedName": "Cucurbita maxima",
+        "acceptedWfoId": "wfo-0000629095",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221005",
+        "scientificName": "Cucurbita maxima",
+        "canonicalName": "cucurbita maxima",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "jättepumpa",
+        "otherSwedishNames": [
+          "jättepumpa"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000629095)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Cucurbita moschata",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000629110",
+        "matchedName": "Cucurbita moschata",
+        "acceptedName": "Cucurbita moschata",
+        "acceptedWfoId": "wfo-0000629110",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221006",
+        "scientificName": "Cucurbita moschata",
+        "canonicalName": "cucurbita moschata",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "myskpumpa",
+        "otherSwedishNames": [
+          "myskpumpa"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cucurbita pepo",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000629123",
+        "matchedName": "Cucurbita pepo",
+        "acceptedName": "Cucurbita pepo",
+        "acceptedWfoId": "wfo-0000629123",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221007",
+        "scientificName": "Cucurbita pepo",
+        "canonicalName": "cucurbita pepo",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "pumpa",
+        "otherSwedishNames": [
+          "prydnadspumpa",
+          "pumpa",
+          "squash",
+          "zucchini"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Cymbopogon citratus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000860954",
+        "matchedName": "Cymbopogon citratus",
+        "acceptedName": "Cymbopogon citratus",
+        "acceptedWfoId": "wfo-0000860954",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Dahlia spp.",
+      "speciesKind": "aggregate",
+      "wfo": {
+        "id": "wfo-4000010667",
+        "matchedName": "Dahlia",
+        "acceptedName": "Dahlia",
+        "acceptedWfoId": "wfo-4000010667",
+        "status": "Accepted",
+        "rank": "genus",
+        "matchType": "genus-only",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:1005796",
+        "scientificName": "Dahlia",
+        "canonicalName": "dahlia",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "genus",
+        "matchType": "genus-level",
+        "recommendedSwedishName": "dahlior",
+        "otherSwedishNames": [
+          "dahlior"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "aggregate name — resolved at genus rank only",
+          "Dyntaxa genus-level only"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Daucus carota",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000638442",
+        "matchedName": "Daucus carota",
+        "acceptedName": "Daucus carota",
+        "acceptedWfoId": "wfo-0000638442",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:219664",
+        "scientificName": "Daucus carota",
+        "canonicalName": "daucus carota",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "morot",
+        "otherSwedishNames": [
+          "morot"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Echinacea purpurea",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000036347",
+        "matchedName": "Echinacea purpurea",
+        "acceptedName": "Echinacea purpurea",
+        "acceptedWfoId": "wfo-0000036347",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221009",
+        "scientificName": "Echinacea purpurea",
+        "canonicalName": "echinacea purpurea",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "röd solhatt",
+        "otherSwedishNames": [
+          "röd rudbeckia",
+          "röd solhatt"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Ficus carica",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000687690",
+        "matchedName": "Ficus carica",
+        "acceptedName": "Ficus carica",
+        "acceptedWfoId": "wfo-0000687690",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222485",
+        "scientificName": "Ficus carica",
+        "canonicalName": "ficus carica",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "fikon",
+        "otherSwedishNames": [
+          "fikon"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Foeniculum vulgare",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000691487",
+        "matchedName": "Foeniculum vulgare",
+        "acceptedName": "Foeniculum vulgare",
+        "acceptedWfoId": "wfo-0000691487",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220143",
+        "scientificName": "Foeniculum vulgare",
+        "canonicalName": "foeniculum vulgare",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "fänkål",
+        "otherSwedishNames": [
+          "fänkol",
+          "fänkål"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "2 backbone row(s) share this canonical name (accepted: wfo-0000691487)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Fragaria × ananassa",
+      "speciesKind": "hybrid",
+      "wfo": {
+        "id": "wfo-0001005541",
+        "matchedName": "Fragaria × ananassa",
+        "acceptedName": "Fragaria × ananassa",
+        "acceptedWfoId": "wfo-0001005541",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "source name carries the hybrid marker ×; Jninty's authored string omits it",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)",
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": [
+          "2 backbone row(s) share this canonical name (accepted: wfo-0001005541)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Helianthus annuus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000088131",
+        "matchedName": "Helianthus annuus",
+        "acceptedName": "Helianthus annuus",
+        "acceptedWfoId": "wfo-0000088131",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222023",
+        "scientificName": "Helianthus annuus",
+        "canonicalName": "helianthus annuus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "solros",
+        "otherSwedishNames": [
+          "solros"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Hibiscus moscheutos",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": null,
+        "matchedName": null,
+        "acceptedName": null,
+        "acceptedWfoId": null,
+        "status": null,
+        "rank": null,
+        "matchType": "ambiguous",
+        "candidates": [
+          "wfo-0001077065 Hibiscus moscheutos -> wfo-1000087358"
+        ]
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO has multiple accepted candidates — not auto-resolved: wfo-0001077065 Hibiscus moscheutos -> wfo-1000087358",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)",
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Hydrangea macrophylla",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000726228",
+        "matchedName": "Hydrangea macrophylla",
+        "acceptedName": "Hydrangea macrophylla",
+        "acceptedWfoId": "wfo-0000726228",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:259689",
+        "scientificName": "Hydrangea macrophylla",
+        "canonicalName": "hydrangea macrophylla",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "hortensia",
+        "otherSwedishNames": [
+          "hortensia"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Ipomoea batatas",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001297246",
+        "matchedName": "Ipomoea batatas",
+        "acceptedName": "Ipomoea batatas",
+        "acceptedWfoId": "wfo-0001297246",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:6007428",
+        "scientificName": "Ipomoea batatas",
+        "canonicalName": "ipomoea batatas",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "batat",
+        "otherSwedishNames": [
+          "batat"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Ipomoea purpurea",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001296676",
+        "matchedName": "Ipomoea purpurea",
+        "acceptedName": "Ipomoea purpurea",
+        "acceptedWfoId": "wfo-0001296676",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223441",
+        "scientificName": "Ipomoea purpurea",
+        "canonicalName": "ipomoea purpurea",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "purpurvinda",
+        "otherSwedishNames": [
+          "Blomman för dagen",
+          "purpurvinda"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Lactuca sativa",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000128816",
+        "matchedName": "Lactuca sativa",
+        "acceptedName": "Lactuca sativa",
+        "acceptedWfoId": "wfo-0000128816",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220217",
+        "scientificName": "Lactuca sativa",
+        "canonicalName": "lactuca sativa",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "sallat",
+        "otherSwedishNames": [
+          "Huvudsallat",
+          "Trädgårdssallat",
+          "sallat"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Lathyrus odoratus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000212700",
+        "matchedName": "Lathyrus odoratus",
+        "acceptedName": "Lathyrus odoratus",
+        "acceptedWfoId": "wfo-0000212700",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221226",
+        "scientificName": "Lathyrus odoratus",
+        "canonicalName": "lathyrus odoratus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "luktärt",
+        "otherSwedishNames": [
+          "luktärt"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Lavandula angustifolia",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000224116",
+        "matchedName": "Lavandula angustifolia",
+        "acceptedName": "Lavandula angustifolia",
+        "acceptedWfoId": "wfo-0000224116",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": [
+          "wfo-0000224115 Lavandula angustifolia -> wfo-0000224181"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221236",
+        "scientificName": "Lavandula angustifolia",
+        "canonicalName": "lavandula angustifolia",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "lavendel",
+        "otherSwedishNames": [
+          "lavendel"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO backbone conflict: wfo-0000224115 Lavandula angustifolia -> wfo-0000224181"
+        ],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000224116)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Malus domestica",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001008355",
+        "matchedName": "Malus × domestica",
+        "acceptedName": "Malus × domestica",
+        "acceptedWfoId": "wfo-0001008355",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223045",
+        "scientificName": "Malus domestica",
+        "canonicalName": "malus domestica",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "apel",
+        "otherSwedishNames": [
+          "apel",
+          "kulturapel",
+          "trädgårdsapel",
+          "äppelträd",
+          "äpple"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)"
+        ],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0001008355)",
+          "1 unreviewed row(s) share this canonical name",
+          "authority disagreement: Dyntaxa 'malus domestica' vs WFO accepted 'malus ×'"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Matricaria chamomilla",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000003146",
+        "matchedName": "Matricaria chamomilla",
+        "acceptedName": "Matricaria chamomilla",
+        "acceptedWfoId": "wfo-0000003146",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220249",
+        "scientificName": "Matricaria chamomilla",
+        "canonicalName": "matricaria chamomilla",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "kamomill",
+        "otherSwedishNames": [
+          "kamomill",
+          "sötblomster",
+          "äkta kamomill"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000003146)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Mentha spp.",
+      "speciesKind": "aggregate",
+      "wfo": {
+        "id": "wfo-4000023748",
+        "matchedName": "Mentha",
+        "acceptedName": "Mentha",
+        "acceptedWfoId": "wfo-4000023748",
+        "status": "Accepted",
+        "rank": "genus",
+        "matchType": "genus-only",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:1006318",
+        "scientificName": "Mentha",
+        "canonicalName": "mentha",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "genus",
+        "matchType": "genus-level",
+        "recommendedSwedishName": "myntor",
+        "otherSwedishNames": [
+          "myntor"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "aggregate name — resolved at genus rank only",
+          "Dyntaxa genus-level only"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Ocimum basilicum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000253230",
+        "matchedName": "Ocimum basilicum",
+        "acceptedName": "Ocimum basilicum",
+        "acceptedWfoId": "wfo-0000253230",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220259",
+        "scientificName": "Ocimum basilicum",
+        "canonicalName": "ocimum basilicum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "basilika",
+        "otherSwedishNames": [
+          "basilika"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Origanum vulgare",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000260765",
+        "matchedName": "Origanum vulgare",
+        "acceptedName": "Origanum vulgare",
+        "acceptedWfoId": "wfo-0000260765",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221738",
+        "scientificName": "Origanum vulgare",
+        "canonicalName": "origanum vulgare",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "kungsmynta",
+        "otherSwedishNames": [
+          "dosta",
+          "konig",
+          "kungsmynta",
+          "oregano",
+          "vild mejram",
+          "vildmejram"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Petroselinum crispum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000745326",
+        "matchedName": "Petroselinum crispum",
+        "acceptedName": "Petroselinum crispum",
+        "acceptedWfoId": "wfo-0000745326",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220848",
+        "scientificName": "Petroselinum crispum",
+        "canonicalName": "petroselinum crispum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "persilja",
+        "otherSwedishNames": [
+          "Bladpersilja",
+          "Rotpersilja",
+          "persilja"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000745326)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Petunia × hybrida",
+      "speciesKind": "hybrid",
+      "wfo": {
+        "id": null,
+        "matchedName": null,
+        "acceptedName": null,
+        "acceptedWfoId": null,
+        "status": null,
+        "rank": null,
+        "matchType": "ambiguous",
+        "candidates": [
+          "wfo-0001024435 Petunia hybrida -> wfo-0001024407"
+        ]
+      },
+      "dyntaxa": {
+        "id": null,
+        "scientificName": null,
+        "canonicalName": null,
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": null,
+        "rank": null,
+        "matchType": "absent",
+        "recommendedSwedishName": null,
+        "otherSwedishNames": null,
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO has multiple accepted candidates — not auto-resolved: wfo-0001024435 Petunia hybrida -> wfo-0001024407",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)",
+          "absent from Dyntaxa (legitimate for garden exotics; not an error)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Phaseolus vulgaris",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000183282",
+        "matchedName": "Phaseolus vulgaris",
+        "acceptedName": "Phaseolus vulgaris",
+        "acceptedWfoId": "wfo-0000183282",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": [
+          "wfo-0000207144 Phaseolus vulgaris -> wfo-0000183263"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221298",
+        "scientificName": "Phaseolus vulgaris",
+        "canonicalName": "phaseolus vulgaris",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "böna",
+        "otherSwedishNames": [
+          "böna",
+          "trädgårdsböna"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO backbone conflict: wfo-0000207144 Phaseolus vulgaris -> wfo-0000183263"
+        ],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0000183282)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Pisum sativum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": null,
+        "matchedName": null,
+        "acceptedName": null,
+        "acceptedWfoId": null,
+        "status": null,
+        "rank": null,
+        "matchType": "ambiguous",
+        "candidates": [
+          "wfo-0000212718 Pisum sativum -> wfo-0000214337"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221300",
+        "scientificName": "Pisum sativum",
+        "canonicalName": "pisum sativum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "ärt",
+        "otherSwedishNames": [
+          "ärt"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO has multiple accepted candidates — not auto-resolved: wfo-0000212718 Pisum sativum -> wfo-0000214337",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Prunus avium",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001006607",
+        "matchedName": "Prunus avium",
+        "acceptedName": "Prunus avium",
+        "acceptedWfoId": "wfo-0001006607",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223076",
+        "scientificName": "Prunus avium",
+        "canonicalName": "prunus avium",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "sötkörsbär",
+        "otherSwedishNames": [
+          "bigarrå",
+          "fylldblommigt fågelbär",
+          "fågelbär",
+          "fågelkörsbär",
+          "hjärtkörsbär",
+          "sötkörs",
+          "sötkörsbär",
+          "vildkörsbär"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Prunus persica",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001005418",
+        "matchedName": "Prunus persica",
+        "acceptedName": "Prunus persica",
+        "acceptedWfoId": "wfo-0001005418",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223084",
+        "scientificName": "Prunus persica",
+        "canonicalName": "prunus persica",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "persika",
+        "otherSwedishNames": [
+          "persika"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0001005418)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Raphanus sativus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000402430",
+        "matchedName": "Raphanus sativus",
+        "acceptedName": "Raphanus sativus",
+        "acceptedWfoId": "wfo-0000402430",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220572",
+        "scientificName": "Raphanus sativus",
+        "canonicalName": "raphanus sativus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "rädisa/rättika",
+        "otherSwedishNames": [
+          "rädisa/rättika"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Rosa spp.",
+      "speciesKind": "aggregate",
+      "wfo": {
+        "id": "wfo-4000033476",
+        "matchedName": "Rosa",
+        "acceptedName": "Rosa",
+        "acceptedWfoId": "wfo-4000033476",
+        "status": "Accepted",
+        "rank": "genus",
+        "matchType": "genus-only",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:1006580",
+        "scientificName": "Rosa",
+        "canonicalName": "rosa",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "genus",
+        "matchType": "genus-level",
+        "recommendedSwedishName": "rosor",
+        "otherSwedishNames": [
+          "rosor"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "aggregate name — resolved at genus rank only",
+          "Dyntaxa genus-level only"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Rubus fruticosus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": null,
+        "matchedName": null,
+        "acceptedName": null,
+        "acceptedWfoId": null,
+        "status": null,
+        "rank": null,
+        "matchType": "ambiguous",
+        "candidates": [
+          "wfo-0000984598 Rubus fruticosus",
+          "wfo-0001017952 Rubus fruticosus"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223178",
+        "scientificName": "Rubus fruticosus",
+        "canonicalName": "rubus fruticosus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "sötbjörnbär",
+        "otherSwedishNames": [
+          "sötbjörnbär"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO has multiple accepted candidates — not auto-resolved: wfo-0000984598 Rubus fruticosus | wfo-0001017952 Rubus fruticosus",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Rubus idaeus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001000827",
+        "matchedName": "Rubus idaeus",
+        "acceptedName": "Rubus idaeus",
+        "acceptedWfoId": "wfo-0001000827",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223156",
+        "scientificName": "Rubus idaeus",
+        "canonicalName": "rubus idaeus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "hallon",
+        "otherSwedishNames": [
+          "hallon"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "4 backbone row(s) share this canonical name (accepted: wfo-0001000827)",
+          "4 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Rudbeckia hirta",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000027627",
+        "matchedName": "Rudbeckia hirta",
+        "acceptedName": "Rudbeckia hirta",
+        "acceptedWfoId": "wfo-0000027627",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220291",
+        "scientificName": "Rudbeckia hirta",
+        "canonicalName": "rudbeckia hirta",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "sträv rudbeckia",
+        "otherSwedishNames": [
+          "sträv rudbeckia"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Salvia officinalis",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000301765",
+        "matchedName": "Salvia officinalis",
+        "acceptedName": "Salvia officinalis",
+        "acceptedWfoId": "wfo-0000301765",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221795",
+        "scientificName": "Salvia officinalis",
+        "canonicalName": "salvia officinalis",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "kryddsalvia",
+        "otherSwedishNames": [
+          "kryddsalvia"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Salvia rosmarinus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000302167",
+        "matchedName": "Salvia rosmarinus",
+        "acceptedName": "Salvia rosmarinus",
+        "acceptedWfoId": "wfo-0000302167",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221789",
+        "scientificName": "Rosmarinus officinalis",
+        "canonicalName": "rosmarinus officinalis",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "manual",
+        "recommendedSwedishName": "rosmarin",
+        "otherSwedishNames": [
+          "rosmarin"
+        ],
+        "liveQueryResult": {
+          "matchType": "absent",
+          "scientificName": null
+        }
+      },
+      "review": {
+        "status": "manual-override",
+        "notes": [
+          "manual override: WFO accepts Salvia rosmarinus; Dyntaxa lags. Re-checked on every taxonomy:generate run."
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Solanum lycopersicum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001029216",
+        "matchedName": "Solanum lycopersicum",
+        "acceptedName": "Solanum lycopersicum",
+        "acceptedWfoId": "wfo-0001029216",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223486",
+        "scientificName": "Solanum lycopersicum",
+        "canonicalName": "solanum lycopersicum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "tomat",
+        "otherSwedishNames": [
+          "kärleksäpple",
+          "tomat"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0001029216)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Solanum melongena",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001029464",
+        "matchedName": "Solanum melongena",
+        "acceptedName": "Solanum melongena",
+        "acceptedWfoId": "wfo-0001029464",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223487",
+        "scientificName": "Solanum melongena",
+        "canonicalName": "solanum melongena",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "aubergin",
+        "otherSwedishNames": [
+          "aubergin",
+          "äggört"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": [
+          "1 backbone row(s) share this canonical name (accepted: wfo-0001029464)",
+          "1 unreviewed row(s) share this canonical name"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Solanum tuberosum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0001031908",
+        "matchedName": "Solanum tuberosum",
+        "acceptedName": "Solanum tuberosum",
+        "acceptedWfoId": "wfo-0001031908",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": [
+          "wfo-0001031907 Solanum tuberosum -> wfo-0001029299",
+          "wfo-0001031909 Solanum tuberosum -> wfo-0001027872"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:223499",
+        "scientificName": "Solanum tuberosum",
+        "canonicalName": "solanum tuberosum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "potatis",
+        "otherSwedishNames": [
+          "potatis"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO backbone conflict: wfo-0001031907 Solanum tuberosum -> wfo-0001029299 | wfo-0001031909 Solanum tuberosum -> wfo-0001027872"
+        ],
+        "info": [
+          "2 backbone row(s) share this canonical name (accepted: wfo-0001031908)"
+        ]
+      }
+    },
+    {
+      "jnintySpecies": "Spinacia oleracea",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000437543",
+        "matchedName": "Spinacia oleracea",
+        "acceptedName": "Spinacia oleracea",
+        "acceptedWfoId": "wfo-0000437543",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220950",
+        "scientificName": "Spinacia oleracea",
+        "canonicalName": "spinacia oleracea",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "spenat",
+        "otherSwedishNames": [
+          "spenat"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Tagetes spp.",
+      "speciesKind": "aggregate",
+      "wfo": {
+        "id": "wfo-4000037446",
+        "matchedName": "Tagetes",
+        "acceptedName": "Tagetes",
+        "acceptedWfoId": "wfo-4000037446",
+        "status": "Accepted",
+        "rank": "genus",
+        "matchType": "genus-only",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:1005906",
+        "scientificName": "Tagetes",
+        "canonicalName": "tagetes",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "genus",
+        "matchType": "genus-level",
+        "recommendedSwedishName": "sammetsblomstersläktet",
+        "otherSwedishNames": [
+          "sammetsblomstersläktet",
+          "sammetstagetes"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "aggregate name — resolved at genus rank only",
+          "Dyntaxa genus-level only"
+        ],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Thymus vulgaris",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000324951",
+        "matchedName": "Thymus vulgaris",
+        "acceptedName": "Thymus vulgaris",
+        "acceptedWfoId": "wfo-0000324951",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221850",
+        "scientificName": "Thymus vulgaris",
+        "canonicalName": "thymus vulgaris",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "kryddtimjan",
+        "otherSwedishNames": [
+          "kryddtimjan",
+          "timjan",
+          "trädgårdstimjan"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Tropaeolum majus",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000459744",
+        "matchedName": "Tropaeolum majus",
+        "acceptedName": "Tropaeolum majus",
+        "acceptedWfoId": "wfo-0000459744",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220610",
+        "scientificName": "Tropaeolum majus",
+        "canonicalName": "tropaeolum majus",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "indiankrasse",
+        "otherSwedishNames": [
+          "indiankrasse"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Vaccinium corymbosum",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000422953",
+        "matchedName": "Vaccinium corymbosum",
+        "acceptedName": "Vaccinium corymbosum",
+        "acceptedWfoId": "wfo-0000422953",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221155",
+        "scientificName": "Vaccinium corymbosum",
+        "canonicalName": "vaccinium corymbosum",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "amerikanskt blåbär",
+        "otherSwedishNames": [
+          "amerikanskt blåbär"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Vitis vinifera",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000421791",
+        "matchedName": "Vitis vinifera",
+        "acceptedName": "Vitis vinifera",
+        "acceptedWfoId": "wfo-0000421791",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:221589",
+        "scientificName": "Vitis vinifera",
+        "canonicalName": "vitis vinifera",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "vin",
+        "otherSwedishNames": [
+          "vin",
+          "vindruva",
+          "vinranka"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Zea mays",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": "wfo-0000907754",
+        "matchedName": "Zea mays",
+        "acceptedName": "Zea mays",
+        "acceptedWfoId": "wfo-0000907754",
+        "status": "Accepted",
+        "rank": "species",
+        "matchType": "accepted",
+        "candidates": null
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:222726",
+        "scientificName": "Zea mays",
+        "canonicalName": "zea mays",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "majs",
+        "otherSwedishNames": [
+          "majs"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "clean",
+        "notes": [],
+        "info": []
+      }
+    },
+    {
+      "jnintySpecies": "Zinnia elegans",
+      "speciesKind": "binomial",
+      "wfo": {
+        "id": null,
+        "matchedName": null,
+        "acceptedName": null,
+        "acceptedWfoId": null,
+        "status": null,
+        "rank": null,
+        "matchType": "ambiguous",
+        "candidates": [
+          "wfo-0000058494 Zinnia elegans",
+          "wfo-0000114531 Zinnia elegans"
+        ]
+      },
+      "dyntaxa": {
+        "id": "urn:lsid:dyntaxa.se:Taxon:220408",
+        "scientificName": "Zinnia elegans",
+        "canonicalName": "zinnia elegans",
+        "acceptedName": null,
+        "acceptedId": null,
+        "taxonomicStatus": "accepted",
+        "rank": "species",
+        "matchType": "exact",
+        "recommendedSwedishName": "zinnia",
+        "otherSwedishNames": [
+          "zinnia"
+        ],
+        "liveQueryResult": null
+      },
+      "review": {
+        "status": "needs-review",
+        "notes": [
+          "WFO has multiple accepted candidates — not auto-resolved: wfo-0000058494 Zinnia elegans | wfo-0000114531 Zinnia elegans",
+          "WFO accepted name differs from Jninty species string (Jninty name preserved)"
+        ],
+        "info": []
+      }
+    }
+  ]
+}

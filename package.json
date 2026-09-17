@@ -31,7 +31,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "taxonomy:refresh": "node scripts/taxonomy/refresh.mjs",
+    "taxonomy:generate": "node scripts/taxonomy/generate-taxonomy.mjs",
+    "taxonomy:check": "node scripts/taxonomy/check-taxonomy.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "note": "Manual overrides applied after automatic resolution. Keyed by Jninty's authored species string (stable identity). Each source pin records the expected accepted name so a refresh can detect staleness. Overrides never change Jninty-owned knowledge identity and never rewrite data/plants.",
+  "overrides": [
+    {
+      "jnintySpecies": "Salvia rosmarinus",
+      "sources": {
+        "dyntaxa": {
+          "id": "urn:lsid:dyntaxa.se:Taxon:221789",
+          "expectAcceptedName": "Rosmarinus officinalis",
+          "decision": "Dyntaxa still treats Rosmarinus officinalis as accepted and does not list Salvia rosmarinus yet. Keep Jninty's authored name; map to the Dyntaxa taxon explicitly as a known authority divergence."
+        }
+      },
+      "decidedAt": "2026-09-17",
+      "note": "WFO accepts Salvia rosmarinus; Dyntaxa lags. Re-checked on every taxonomy:generate run."
+    }
+  ]
+}

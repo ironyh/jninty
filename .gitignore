@@ -33,3 +33,4 @@ sync/.env
 !.dev.vars.example
 .env*
 !.env.example
+.taxonomy-cache/
