@@ -220,20 +220,36 @@ describe("scheduling backup round trip", () => {
     }
   });
 
-  it("preserves rescheduled dates (scheduledDate vs originalDate)", () => {
-    const transplant = originalTasks.find((t) => t.taskType === "transplant")!;
-    expect(transplant.scheduledDate).toBe("2026-05-10");
-    expect(transplant.originalDate).toBe("2026-05-01");
+  it("preserves rescheduled dates (scheduledDate vs originalDate)", async () => {
+    const original = originalTasks.find((t) => t.taskType === "transplant")!;
+    expect(original.scheduledDate).toBe("2026-05-10");
+    expect(original.originalDate).toBe("2026-05-01");
+    // Read back through the repository so a broken importer cannot pass.
+    const tasks = await scheduleTaskRepository.getAll();
+    const restored = tasks.find((t) => t.id === original.id);
+    expect(restored, `task ${original.id} missing`).toBeDefined();
+    expect(restored!.scheduledDate).toBe(original.scheduledDate);
+    expect(restored!.originalDate).toBe(original.originalDate);
   });
 
-  it("preserves completion state and timestamps", () => {
-    const harvest = originalTasks.find((t) => t.taskType === "harvest")!;
-    expect(harvest.isCompleted).toBe(true);
-    expect(harvest.completedDate).toBe("2026-08-05");
-    expect(harvest.completedAt).toBeTruthy();
-    const seedStart = originalTasks.find((t) => t.taskType === "seed_start")!;
-    expect(seedStart.isCompleted).toBe(false);
-    expect(seedStart.completedDate).toBeUndefined();
+  it("preserves completion state and timestamps", async () => {
+    const tasks = await scheduleTaskRepository.getAll();
+    const originalHarvest = originalTasks.find((t) => t.taskType === "harvest")!;
+    const harvest = tasks.find((t) => t.id === originalHarvest.id);
+    expect(harvest, `task ${originalHarvest.id} missing`).toBeDefined();
+    expect(harvest!.isCompleted).toBe(originalHarvest.isCompleted);
+    expect(harvest!.isCompleted).toBe(true);
+    expect(harvest!.completedDate).toBe(originalHarvest.completedDate);
+    // Timestamp must survive serialization/import byte-for-byte, not just exist.
+    expect(harvest!.completedAt).toBe(originalHarvest.completedAt);
+    const originalSeedStart = originalTasks.find(
+      (t) => t.taskType === "seed_start",
+    )!;
+    const seedStart = tasks.find((t) => t.id === originalSeedStart.id);
+    expect(seedStart, `task ${originalSeedStart.id} missing`).toBeDefined();
+    expect(seedStart!.isCompleted).toBe(originalSeedStart.isCompleted);
+    expect(seedStart!.isCompleted).toBe(false);
+    expect(seedStart!.completedDate).toBeUndefined();
   });
 
   it("leaves other exported entity types intact", async () => {
