@@ -7,6 +7,7 @@ import { PLANT_CATEGORIES } from "../constants/knowledgeCategories.ts";
 import { TYPE_LABELS } from "../constants/plantLabels";
 import { SUN_LABELS, WATER_LABELS, SOURCE_LABELS } from "../constants/knowledgeLabels";
 import { useDebounce } from "../hooks/useDebounce";
+import { speciesMatchesTaxonomyAliases } from "../services/taxonomyAliases.ts";
 import Card from "../components/ui/Card";
 import Badge from "../components/ui/Badge";
 import Input from "../components/ui/Input";
@@ -92,7 +93,12 @@ export default function KnowledgeHubPage() {
       (item) =>
         item.data.commonName.toLowerCase().includes(q) ||
         item.data.species.toLowerCase().includes(q) ||
-        (item.data.variety && item.data.variety.toLowerCase().includes(q)),
+        (item.data.variety && item.data.variety.toLowerCase().includes(q)) ||
+        // additive: safe taxonomy aliases (Swedish names, scientific synonyms)
+        // keyed by the entry's authored species string — applies to built-in
+        // and custom entries alike; returns false when taxonomy data is
+        // unavailable.
+        speciesMatchesTaxonomyAliases(item.data.species, debouncedQuery),
     );
   }, [allItems, debouncedQuery]);
 

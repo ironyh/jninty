@@ -194,7 +194,7 @@ function buildSpeciesMap(): void {
         if (taxon.dyntaxa.matchType === "manual" && taxon.dyntaxa.scientificName) names.push(taxon.dyntaxa.scientificName);
       }
       const unique = [...new Set(names.map((n) => normalized(n)))].filter((n) => n.length > 0);
-      if (unique.length > 0) speciesMap.set(foldedKey(species), unique);
+      if (unique.length > 0) speciesMap.set(normalized(species), unique);
     }
   } catch {
     speciesMap = new Map(); // graceful fallback
@@ -211,14 +211,38 @@ function genusName(acceptedName: string) {
 }
 
 /**
- * Match a search query against taxonomy aliases.
- * Returns authored species strings ordered by match strength:
+ * Best match tier of a query against one species' alias list, or null:
  *   1. exact (diacritic-preserving) alias
  *   2. exact diacritic/hybrid-folded alias
  *   3. normalized prefix
- *   4. folded prefix / normalized substring
- * Ambiguous candidates and unresolved values are never in the index, so
- * they can never be returned. Deterministic.
+ *   4. folded prefix
+ *   5. normalized substring
+ *   6. folded substring
+ */
+function bestAliasTier(aliases: string[], exact: string, toler: string): number | null {
+  let tier: number | null = null;
+  for (const aliasNorm of aliases) {
+    if (tier != null && tier <= 3) continue; // already a strong match
+    let candidateTier: number | null = null;
+    if (aliasNorm === exact) candidateTier = 1;
+    else {
+      const aliasFolded = fold(aliasNorm);
+      if (aliasFolded === toler) candidateTier = 2;
+      else if (aliasNorm.startsWith(exact)) candidateTier = 3;
+      else if (aliasFolded.startsWith(toler)) candidateTier = 4;
+      else if (aliasNorm.includes(exact) && exact.length >= 3) candidateTier = 5;
+      else if (aliasFolded.includes(toler) && toler.length >= 3) candidateTier = 6;
+    }
+    if (candidateTier != null && (tier === null || candidateTier < tier)) tier = candidateTier;
+  }
+  return tier;
+}
+
+/**
+ * Match a search query against taxonomy aliases.
+ * Returns authored species strings ordered by match strength (see
+ * bestAliasTier). Ambiguous candidates and unresolved values are never in
+ * the index, so they can never be returned. Deterministic.
  */
 export function matchTaxonomyAliases(query: string): string[] {
   if (!speciesMapInitialized) getTaxonomyAliasesBySpecies();
@@ -227,31 +251,33 @@ export function matchTaxonomyAliases(query: string): string[] {
   if (!exact) return [];
 
   const best = new Map<string, number>(); // species -> tier
-  const consider = (species: string, tier: number) => {
-    const cur = best.get(species);
-    if (cur === undefined || tier < cur) best.set(species, tier);
-  };
-
   for (const [species, aliases] of speciesMap) {
-    let tier: number | null = null;
-    for (const aliasNorm of aliases) {
-      if (tier != null && tier <= 3) continue; // already a strong match
-      let candidateTier: number | null = null;
-      if (aliasNorm === exact) candidateTier = 1;
-      else {
-        const aliasFolded = fold(aliasNorm);
-        if (aliasFolded === toler) candidateTier = 2;
-        else if (aliasNorm.startsWith(exact)) candidateTier = 3;
-        else if (aliasFolded.startsWith(toler)) candidateTier = 4;
-        else if (aliasNorm.includes(exact) && exact.length >= 3) candidateTier = 5;
-        else if (aliasFolded.includes(toler) && toler.length >= 3) candidateTier = 6;
-      }
-      if (candidateTier != null && (tier === null || candidateTier < tier)) tier = candidateTier;
-    }
-    if (tier != null) consider(species, tier);
+    const tier = bestAliasTier(aliases, exact, toler);
+    if (tier != null) best.set(species, tier);
   }
 
   return [...best.entries()]
     .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
     .map(([species]) => species);
+}
+
+/**
+ * Whether one authored species string has a safe taxonomy alias matching the
+ * query (same normalization and inclusion policy as matchTaxonomyAliases).
+ * Used by callers that filter items in place — e.g. the Knowledge Hub filter,
+ * which applies it equally to built-in and custom entries whose authored
+ * species string maps to a taxonomy species. Returns false (never throws)
+ * for species without taxonomy data or on any lookup failure.
+ */
+export function speciesMatchesTaxonomyAliases(species: string, query: string): boolean {
+  try {
+    if (!speciesMapInitialized) getTaxonomyAliasesBySpecies();
+    const aliases = speciesMap.get(normalized(species));
+    if (!aliases || aliases.length === 0) return false;
+    const exact = normalized(query);
+    if (!exact) return false;
+    return bestAliasTier(aliases, exact, foldedKey(query)) != null;
+  } catch {
+    return false;
+  }
 }
