@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import CloudSyncSettings from "./CloudSyncSettings";
 
 // Mock the auth store to return an authenticated user
 vi.mock("../../store/authStore", () => ({
@@ -38,7 +39,6 @@ vi.mock("../../lib/apiClient", () => ({
 
 describe("CloudSyncSettings (authenticated)", () => {
   it("renders subscription actions for active user", async () => {
-    const { default: CloudSyncSettings } = await import("./CloudSyncSettings");
     render(<CloudSyncSettings />);
 
     expect(screen.getByText("Cancel Subscription")).toBeInTheDocument();
@@ -47,7 +47,6 @@ describe("CloudSyncSettings (authenticated)", () => {
   });
 
   it("renders user email and plan badge", async () => {
-    const { default: CloudSyncSettings } = await import("./CloudSyncSettings");
     render(<CloudSyncSettings />);
 
     expect(screen.getByText("test@example.com")).toBeInTheDocument();
