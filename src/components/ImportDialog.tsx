@@ -131,6 +131,10 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
     ? Object.values(parsed.counts).reduce((a, b) => a + b, 0)
     : 0;
 
+  // Replace is destructive, so it requires a fully valid backup. Merge
+  // remains available — it only skips the invalid records.
+  const replaceBlocked = parsed !== null && !parsed.valid;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-soil-900/50 p-4"
@@ -248,13 +252,18 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
                     </p>
                   </div>
                 </label>
-                <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border-default p-3 has-[:checked]:border-red-600 has-[:checked]:bg-red-50">
+                <label
+                  className={`flex items-start gap-3 rounded-lg border border-border-default p-3 has-[:checked]:border-red-600 has-[:checked]:bg-red-50 ${
+                    replaceBlocked ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+                  }`}
+                >
                   <input
                     type="radio"
                     name="importMode"
                     value="replace"
                     checked={mode === "replace"}
                     onChange={() => setMode("replace")}
+                    disabled={replaceBlocked}
                     className="mt-0.5 accent-red-600"
                   />
                   <div>
@@ -265,6 +274,13 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
                       Delete all existing data and replace with the backup. This
                       cannot be undone.
                     </p>
+                    {replaceBlocked && (
+                      <p className="mt-1 text-xs font-medium text-red-600">
+                        Unavailable for this backup: it contains validation
+                        errors, so it cannot fully restore your data. Merge
+                        import will skip the invalid records.
+                      </p>
+                    )}
                   </div>
                 </label>
               </div>
@@ -282,7 +298,7 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
                     void handleImport();
                   }
                 }}
-                disabled={totalEntities === 0}
+                disabled={totalEntities === 0 || (mode === "replace" && replaceBlocked)}
               >
                 {mode === "merge" ? "Import" : "Next"}
               </Button>

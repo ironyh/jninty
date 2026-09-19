@@ -15,11 +15,11 @@ vi.mock("../db/pouchdb/client.ts", () => ({
   get localDB() {
     return testDB;
   },
-  async destroyAndRecreate() {
+  destroyAndRecreate: vi.fn(async () => {
     testDB = new PouchDB(`test-import-replace-${crypto.randomUUID()}`, {
       adapter: "memory",
     });
-  },
+  }),
   setupSync: vi.fn(),
   stopSync: vi.fn(),
   getSyncStatus: () => "disabled" as const,
@@ -73,6 +73,7 @@ const {
 } = await import("./importer.ts");
 const { toPouchDoc } = await import("../db/pouchdb/utils.ts");
 const { saveOriginal } = await import("../db/pouchdb/originalsStore.ts");
+const { destroyAndRecreate } = await import("../db/pouchdb/client.ts");
 
 // ─── DB setup ───
 
@@ -384,6 +385,32 @@ describe("executeImportMerge", () => {
     expect(result.skipped).toBeGreaterThanOrEqual(1);
   });
 
+  it("keeps partial-import semantics for backups with validation errors", async () => {
+    // Merge is intentionally partial: invalid records are skipped, valid
+    // ones are inserted, and existing data is never destroyed.
+    const existingPlant = makePlant({ species: "Existing Plant" });
+    await seedDoc(existingPlant, "plant");
+
+    const newPlant = makePlant({ species: "New Plant" });
+    const file = await buildZip(makeManifest(), {
+      plantInstances: [newPlant, { id: "bad", version: 1 }],
+    });
+
+    const parsed = await parseZip(file);
+    expect(parsed.valid).toBe(false);
+
+    const result = await executeImportMerge(parsed);
+
+    expect(result.inserted).toBe(1);
+    expect(result.errors).toHaveLength(0);
+    expect(destroyAndRecreate).not.toHaveBeenCalled();
+
+    // Both the pre-existing and the newly imported plants are intact
+    await testDB.get(`plant:${existingPlant.id}`);
+    const doc = await testDB.get(`plant:${newPlant.id}`);
+    expect((doc as unknown as Record<string, unknown>)["species"]).toBe("New Plant");
+  });
+
   it("returns error for empty parsed data", async () => {
     const result = await executeImportMerge({
       valid: false,
@@ -432,6 +459,101 @@ describe("executeImportReplace", () => {
 
     const doc = await testDB.get("settings:singleton");
     expect((doc as unknown as Record<string, unknown>)["growingZone"]).toBe("7b");
+  });
+
+  it("refuses replace when the backup contains validation errors", async () => {
+    // Audit scenario: a backup with valid AND invalid records must never
+    // reach database destruction via replace.
+    const existingPlant = makePlant({ species: "Existing Plant" });
+    await seedDoc(existingPlant, "plant");
+
+    const validPlant = makePlant({ species: "Valid Plant" });
+    const file = await buildZip(makeManifest(), {
+      plantInstances: [validPlant, { id: "bad", version: 1 }],
+    });
+
+    const parsed = await parseZip(file);
+    expect(parsed.valid).toBe(false);
+    expect(parsed.data).not.toBeNull();
+
+    const result = await executeImportReplace(parsed);
+
+    expect(result.inserted).toBe(0);
+    expect(result.errors[0]).toContain("Replace import refused");
+    // Underlying validation errors are surfaced to the caller
+    expect(
+      result.errors.some((err) => err.includes("plantInstances.json[1]")),
+    ).toBe(true);
+
+    // Database destruction was never invoked and local data is intact
+    expect(destroyAndRecreate).not.toHaveBeenCalled();
+    const doc = await testDB.get(`plant:${existingPlant.id}`);
+    expect((doc as unknown as Record<string, unknown>)["species"]).toBe("Existing Plant");
+  });
+
+  it("refuses direct calls with an invalid parsed payload", async () => {
+    const file = await buildZip(makeManifest(), {
+      plantInstances: [makePlant()],
+    });
+    const base = await parseZip(file);
+
+    // Hand-constructed payload, bypassing parseZip entirely
+    const result = await executeImportReplace({
+      ...base,
+      valid: false,
+      errors: ["plantInstances.json[0]: forced error"],
+    });
+
+    expect(result.inserted).toBe(0);
+    expect(result.errors[0]).toContain("Replace import refused");
+    expect(destroyAndRecreate).not.toHaveBeenCalled();
+
+    // Also refused when `valid` is wrongly true but errors are present
+    const resultWithBadFlag = await executeImportReplace({
+      ...base,
+      valid: true,
+      errors: ["plantInstances.json[0]: forced error"],
+    });
+    expect(resultWithBadFlag.inserted).toBe(0);
+    expect(destroyAndRecreate).not.toHaveBeenCalled();
+  });
+
+  it("still replaces when optional data files are missing", async () => {
+    // Only settings.json present — all other data files absent from the ZIP
+    await seedDoc(makePlant({ species: "Old Plant" }), "plant");
+
+    const file = await buildZip(makeManifest(), {
+      settings: [makeSettings()],
+    });
+
+    const parsed = await parseZip(file);
+    expect(parsed.valid).toBe(true);
+    expect(parsed.errors).toHaveLength(0);
+
+    const result = await executeImportReplace(parsed);
+
+    expect(result.errors).toHaveLength(0);
+    expect(result.inserted).toBe(1);
+    const doc = await testDB.get("settings:singleton");
+    expect((doc as unknown as Record<string, unknown>)["growingZone"]).toBe("7b");
+  });
+
+  it("accepts older schema versions for replace", async () => {
+    const plant = makePlant();
+    const file = await buildZip(
+      makeManifest({ schemaVersion: 3 }),
+      { plantInstances: [plant] },
+    );
+
+    const parsed = await parseZip(file);
+    expect(parsed.valid).toBe(true);
+
+    const result = await executeImportReplace(parsed);
+
+    expect(result.inserted).toBe(1);
+    expect(result.errors).toHaveLength(0);
+    const doc = await testDB.get(`plant:${plant.id}`);
+    expect((doc as unknown as Record<string, unknown>)["species"]).toBe("Solanum lycopersicum");
   });
 
   it("returns error for empty parsed data", async () => {

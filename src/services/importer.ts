@@ -355,6 +355,21 @@ export async function executeImportReplace(
     return { inserted: 0, skipped: 0, errors: ["No parsed data"] };
   }
 
+  // Replace destroys the existing database before writing; a backup with
+  // validation errors would leave it only partially restored with no
+  // rollback. Refuse up front. Merge intentionally stays partial — it
+  // skips invalid records and touches nothing else.
+  if (!parsed.valid || parsed.errors.length > 0) {
+    return {
+      inserted: 0,
+      skipped: 0,
+      errors: [
+        "Replace import refused: backup contains validation errors. The existing database was left unchanged. Use merge import to import only the valid records, or fix and re-export the backup.",
+        ...parsed.errors,
+      ],
+    };
+  }
+
   const allErrors: string[] = [];
   let totalInserted = 0;
 
