@@ -6,6 +6,73 @@ interface ConflictDoc {
   _conflicts?: string[];
 }
 
+type ConflictCandidate = {
+  _rev?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+};
+
+/**
+ * Whether a conflict candidate is a tombstone. Only a non-empty string
+ * `deletedAt` represents a soft delete; Jninty's soft-delete semantics are
+ * entirely represented by this field, so anything else is treated as live.
+ */
+function isTombstone(candidate: ConflictCandidate): boolean {
+  return (
+    typeof candidate.deletedAt === "string" && candidate.deletedAt.length > 0
+  );
+}
+
+/**
+ * Total deterministic ordering over the conflicting leaves of one document.
+ * Tombstone-dominant policy:
+ *   1. a tombstone (valid `deletedAt`) beats every live leaf;
+ *   2. tombstone vs tombstone: latest `deletedAt` wins;
+ *   3. live vs live: latest `updatedAt` wins (missing `updatedAt` counts as
+ *      the earliest possible time);
+ *   4. any remaining tie is broken by lexical `_rev`, so the same set of
+ *      leaves yields the same winner on every device, independent of
+ *      enumeration order.
+ *
+ * Deletion dominance is deliberate: Jninty's delete UI presents deletion as
+ * permanent ("cannot be undone") and there is no undelete or conflict-
+ * resolution UI, so a competing live edit must not silently resurrect a
+ * deleted entity. The losing leaf's fields are discarded (documented
+ * tradeoff) — no merged revision is ever constructed.
+ *
+ * Returns < 0 if `a` loses to `b`, > 0 if `a` beats `b`, 0 if identical.
+ */
+export function compareConflictCandidates(
+  a: ConflictCandidate,
+  b: ConflictCandidate,
+): number {
+  const aTombstone = isTombstone(a);
+  const bTombstone = isTombstone(b);
+  if (aTombstone !== bTombstone) return aTombstone ? 1 : -1;
+
+  const timeKey = (candidate: ConflictCandidate): string => {
+    if (aTombstone && bTombstone) {
+      return typeof candidate.deletedAt === "string" &&
+        candidate.deletedAt.length > 0
+        ? candidate.deletedAt
+        : "";
+    }
+    return typeof candidate.updatedAt === "string" &&
+      candidate.updatedAt.length > 0
+      ? candidate.updatedAt
+      : "";
+  };
+
+  const aKey = timeKey(a);
+  const bKey = timeKey(b);
+  if (aKey !== bKey) return aKey < bKey ? -1 : 1;
+
+  const aRev = a._rev ?? "";
+  const bRev = b._rev ?? "";
+  if (aRev !== bRev) return aRev < bRev ? -1 : 1;
+  return 0;
+}
+
 export async function getConflicts(): Promise<ConflictDoc[]> {
   const result = await localDB.allDocs({
     conflicts: true,
@@ -53,28 +120,29 @@ export async function autoResolveByLastWrite(): Promise<number> {
   for (const doc of conflictDocs) {
     try {
       const allRevs = [doc._rev, ...(doc._conflicts ?? [])];
-      let latestRev = doc._rev;
-      let latestTime = getUpdatedAt(doc);
 
+      // Tombstone-dominant winner selection (see compareConflictCandidates).
+      // Fetching every conflicting leaf up front keeps the result independent
+      // of enumeration order.
+      let winner: ConflictCandidate = doc;
       for (const rev of doc._conflicts ?? []) {
-        const revDoc = await localDB.get(doc._id, { rev });
-        const revTime = getUpdatedAt(revDoc);
-        if (revTime > latestTime) {
-          latestTime = revTime;
-          latestRev = rev;
-        }
+        const candidate = (await localDB.get(doc._id, {
+          rev,
+        })) as ConflictCandidate;
+        if (compareConflictCandidates(winner, candidate) < 0) winner = candidate;
       }
+      const winningRev = winner._rev ?? doc._rev;
 
       // Delete all losing revisions
       for (const rev of allRevs) {
-        if (rev !== latestRev) {
+        if (rev !== winningRev) {
           await localDB.remove(doc._id, rev);
         }
       }
 
       resolved++;
       console.log(
-        `[sync] Auto-resolved conflict on ${doc._id}: kept rev ${latestRev}`,
+        `[sync] Auto-resolved conflict on ${doc._id}: kept rev ${winningRev}`,
       );
     } catch (err) {
       console.warn(`[sync] Failed to resolve conflict on ${doc._id}:`, err);
@@ -82,9 +150,4 @@ export async function autoResolveByLastWrite(): Promise<number> {
   }
 
   return resolved;
-}
-
-function getUpdatedAt(doc: unknown): string {
-  const d = doc as Record<string, unknown>;
-  return (typeof d["updatedAt"] === "string" ? d["updatedAt"] : "") as string;
 }
