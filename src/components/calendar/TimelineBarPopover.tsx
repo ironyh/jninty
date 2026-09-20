@@ -72,6 +72,13 @@ const TimelineBarPopover = forwardRef<HTMLDivElement, TimelineBarPopoverProps>(
           </p>
         )}
 
+        {/* Sowing method (absent on tasks from legacy schedules) */}
+        {task.sowingMethod && (
+          <p className="mt-1 text-xs text-text-muted">
+            Sowing: {task.sowingMethod === "direct" ? "Direct sow" : "Indoor start"}
+          </p>
+        )}
+
         {/* Completion toggle */}
         <div className="mt-3 border-t border-border-default pt-2">
           <button
