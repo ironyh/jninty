@@ -175,6 +175,43 @@ describe("analyzeBedCompanions", () => {
     expect(report.suggestions).toEqual([]);
   });
 
+  it("suggests rose for solo hibiscus and suppresses it once rose is present in the bed", () => {
+    const hibiscus = makePlant({ id: "p1", species: "Hibiscus moscheutos", nickname: "Hibiscus" });
+    const soloPlantings: Planting[] = [
+      makePlanting({ id: "pl1", plantInstanceId: "p1", bedId: "bed-1" }),
+    ];
+
+    const solo = analyzeBedCompanions("bed-1", soloPlantings, buildMap([hibiscus]));
+    expect(solo.suggestions[0]).toMatchObject({
+      forPlant: { id: "p1" },
+      suggestedCompanion: "rose",
+    });
+
+    const rose = makePlant({ id: "p2", species: "Rosa spp.", nickname: "Rose" });
+    const bedPlantings: Planting[] = [
+      makePlanting({ id: "pl1", plantInstanceId: "p1", bedId: "bed-1" }),
+      makePlanting({ id: "pl2", plantInstanceId: "p2", bedId: "bed-1" }),
+    ];
+
+    const withRose = analyzeBedCompanions("bed-1", bedPlantings, buildMap([hibiscus, rose]));
+    expect(withRose.suggestions.every((s) => s.suggestedCompanion !== "rose")).toBe(true);
+  });
+
+  it("caps suggestions at three when more eligible companions exist", () => {
+    const rose = makePlant({ id: "p1", species: "Rosa spp.", nickname: "Rose" });
+    const plantings: Planting[] = [makePlanting({ id: "pl1", plantInstanceId: "p1", bedId: "bed-1" })];
+
+    const report = analyzeBedCompanions("bed-1", plantings, buildMap([rose]));
+
+    // Rose lists five good companions, none matching itself; the per-plant cap binds.
+    expect(report.suggestions).toHaveLength(3);
+    const roseGood = new Set(["garlic", "chives", "lavender", "marigold", "parsley"]);
+    for (const s of report.suggestions) {
+      expect(roseGood.has(s.suggestedCompanion)).toBe(true);
+      expect(s.forPlant.id).toBe("p1");
+    }
+  });
+
   it("deduplicates symmetric pairings", () => {
     // Tomato says basil is good, basil says tomato is good —
     // should only appear once

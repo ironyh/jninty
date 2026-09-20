@@ -257,9 +257,6 @@ export function analyzeBedCompanions(
     // Generate suggestions for good companions not present in the bed.
     // Only for small beds (≤3 plants) to keep suggestions actionable.
     if (bedPlants.length <= 3) {
-      const bedSpeciesSet = new Set(
-        bedPlants.map((bp) => bp.plant.species.toLowerCase()),
-      );
       let suggestionCount = 0;
 
       for (const goodTag of companionsA.good) {
@@ -273,19 +270,6 @@ export function analyzeBedCompanions(
 
         // Don't suggest if the tag matches the plant's own species
         if (companionTagMatchesPlant(goodTag, entryA.plant.species, index))
-          continue;
-
-        // Avoid suggesting something whose species is already in the bed
-        // (the tag might match a different common name for the same species)
-        const tagLower = goodTag.toLowerCase();
-        let matchedKb: PlantKnowledge | undefined;
-        for (const entry of index.values()) {
-          if (entry.commonName.toLowerCase().includes(tagLower)) {
-            matchedKb = entry;
-            break;
-          }
-        }
-        if (matchedKb && bedSpeciesSet.has(matchedKb.species.toLowerCase()))
           continue;
 
         suggestions.push({
