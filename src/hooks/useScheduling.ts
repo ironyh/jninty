@@ -12,7 +12,11 @@ import {
   plantingScheduleRepository,
   scheduleTaskRepository,
 } from "../db/index.ts";
-import type { ScheduleDirection, CropSource } from "../validation/plantingSchedule.schema.ts";
+import type {
+  ScheduleDirection,
+  CropSource,
+  SowingMethod,
+} from "../validation/plantingSchedule.schema.ts";
 import type { ScheduleTask } from "../validation/scheduleTask.schema.ts";
 import type { PlantingSchedule } from "../validation/plantingSchedule.schema.ts";
 
@@ -24,6 +28,8 @@ export interface CreateScheduleParams {
   varietyName: string;
   anchorDate: string;
   direction: ScheduleDirection;
+  // Explicit sowing method; omit for the legacy algorithm branch selection.
+  sowingMethod?: SowingMethod;
   bedId?: string;
   bedName?: string;
   seasonId?: string;
@@ -74,6 +80,7 @@ export function useScheduling() {
         fields,
         params.anchorDate,
         params.direction,
+        params.sowingMethod,
       );
 
       // Build schedule input — use Object.assign for optional fields
@@ -91,6 +98,7 @@ export function useScheduling() {
           harvestEndDate: dates.harvestEndDate,
           status: "active" as const,
         },
+        params.sowingMethod ? { sowingMethod: params.sowingMethod } : {},
         params.bedId ? { bedId: params.bedId } : {},
         params.bedName ? { bedName: params.bedName } : {},
         params.seasonId ? { seasonId: params.seasonId } : {},
@@ -112,6 +120,7 @@ export function useScheduling() {
         params.varietyName,
         params.bedId,
         params.bedName,
+        params.sowingMethod,
       );
 
       const tasks = await scheduleTaskRepository.createBatch(taskInputs);

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { baseEntitySchema, isoDate, isoTimestamp } from "./base.schema.ts";
+import { sowingMethodSchema } from "./plantingSchedule.schema.ts";
 
 export const scheduleTaskTypeSchema = z.enum([
   "seed_start",
@@ -24,6 +25,9 @@ export const scheduleTaskSchema = baseEntitySchema
     varietyName: z.string().min(1),
     bedId: z.string().uuid().optional(),
     bedName: z.string().min(1).optional(),
+    // Snapshot of the schedule's explicit sowing method at creation time
+    // (absent on tasks from legacy schedules — no fabricated method).
+    sowingMethod: sowingMethodSchema.optional(),
 
     // Scheduling
     scheduledDate: isoDate,

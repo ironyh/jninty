@@ -1,11 +1,18 @@
 import { format, parseISO } from "date-fns";
 import { TASK_TYPE_COLORS } from "../calendar/taskTypeColors.ts";
 import type { ComputedDates } from "../../services/schedulingService.ts";
+import type { SowingMethod } from "../../validation/plantingSchedule.schema.ts";
+
+const SOWING_METHOD_LABELS: Record<SowingMethod, string> = {
+  indoor: "Indoor start",
+  direct: "Direct sow",
+};
 
 interface StepConfirmProps {
   cropName: string;
   varietyName: string;
   bedName: string | null;
+  sowingMethod: SowingMethod | null;
   dates: ComputedDates;
   saving: boolean;
   onConfirm: () => void;
@@ -16,6 +23,7 @@ export default function StepConfirm({
   cropName,
   varietyName,
   bedName,
+  sowingMethod,
   dates,
   saving,
   onConfirm,
@@ -87,6 +95,14 @@ export default function StepConfirm({
               {bedName ?? "No bed"}
             </span>
           </div>
+          {sowingMethod && (
+            <div className="mt-2 flex justify-between">
+              <span className="text-text-muted">Method</span>
+              <span className="font-medium text-text-primary">
+                {SOWING_METHOD_LABELS[sowingMethod]}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="mt-4 border-t border-border-default pt-3">

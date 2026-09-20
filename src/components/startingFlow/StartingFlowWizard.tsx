@@ -16,11 +16,16 @@ import {
 } from "../../services/knowledgeBase.ts";
 import {
   computeTaskDates,
+  isSowingMethodSupported,
   type ComputedDates,
   type SchedulingDateFields,
 } from "../../services/schedulingService.ts";
 import type { PlantKnowledge } from "../../validation/plantKnowledge.schema.ts";
-import type { ScheduleDirection, CropSource } from "../../validation/plantingSchedule.schema.ts";
+import type {
+  ScheduleDirection,
+  CropSource,
+  SowingMethod,
+} from "../../validation/plantingSchedule.schema.ts";
 
 type WizardStep =
   | "crop"
@@ -47,6 +52,7 @@ interface WizardState {
   varietyName: string;
   schedulingFields: SchedulingDateFields | null;
   direction: ScheduleDirection;
+  sowingMethod: SowingMethod | null;
   anchorDate: string;
   dates: ComputedDates | null;
   bedId: string | null;
@@ -61,6 +67,7 @@ const initialState: WizardState = {
   varietyName: "",
   schedulingFields: null,
   direction: "forward",
+  sowingMethod: null,
   anchorDate: "",
   dates: null,
   bedId: null,
@@ -116,16 +123,34 @@ export default function StartingFlowWizard({
   const handleVarietySelect = useCallback(
     (entry: PlantKnowledge) => {
       const fields = extractSchedulingFields(entry);
-      setState((prev) => ({
-        ...prev,
-        varietyId: builtInEntryId(entry.species, entry.variety),
-        varietyName: entry.variety ?? entry.commonName,
-        schedulingFields: fields,
-      }));
+      setState((prev) => {
+        // Keep a choice the new variety still supports; otherwise reset.
+        // Dual-method varieties get the legacy default (indoor branch)
+        // seeded so the visible radio always matches the committed state.
+        const kept =
+          prev.sowingMethod && fields &&
+          isSowingMethodSupported(fields, prev.sowingMethod)
+            ? prev.sowingMethod
+            : null;
+        const dual = fields != null &&
+          isSowingMethodSupported(fields, "indoor") &&
+          isSowingMethodSupported(fields, "direct");
+        return {
+          ...prev,
+          varietyId: builtInEntryId(entry.species, entry.variety),
+          varietyName: entry.variety ?? entry.commonName,
+          schedulingFields: fields,
+          sowingMethod: kept ?? (dual ? "indoor" : null),
+        };
+      });
       setStep("date");
     },
     [],
   );
+
+  const handleSowingMethodChange = useCallback((method: SowingMethod) => {
+    setState((prev) => ({ ...prev, sowingMethod: method }));
+  }, []);
 
   const handleDateConfirm = useCallback(
     (date: string, direction: ScheduleDirection) => {
@@ -136,8 +161,19 @@ export default function StartingFlowWizard({
       );
       const fields = entry ? extractSchedulingFields(entry) : state.schedulingFields;
       if (!fields) return;
+      if (
+        state.sowingMethod &&
+        !isSowingMethodSupported(fields, state.sowingMethod)
+      ) {
+        return;
+      }
 
-      const dates = computeTaskDates(fields, date, direction);
+      const dates = computeTaskDates(
+        fields,
+        date,
+        direction,
+        state.sowingMethod ?? undefined,
+      );
       setState((prev) => ({
         ...prev,
         anchorDate: date,
@@ -146,7 +182,7 @@ export default function StartingFlowWizard({
       }));
       setStep("preview");
     },
-    [state.cropId, state.varietyId, state.schedulingFields],
+    [state.cropId, state.varietyId, state.schedulingFields, state.sowingMethod],
   );
 
   const handleDateChange = useCallback((key: string, date: string) => {
@@ -182,12 +218,19 @@ export default function StartingFlowWizard({
         varietyName: state.varietyName,
         anchorDate: state.anchorDate,
         direction: state.direction,
+        ...(state.sowingMethod ? { sowingMethod: state.sowingMethod } : {}),
         ...(state.bedId ? { bedId: state.bedId } : {}),
         ...(state.bedName ? { bedName: state.bedName } : {}),
       });
 
       toast(
-        `${state.cropName} (${state.varietyName}) planting created!`,
+        `${state.cropName} (${state.varietyName}) planting created${
+          state.sowingMethod === "direct"
+            ? " — direct sow"
+            : state.sowingMethod === "indoor"
+              ? " — indoor start"
+              : ""
+        }!`,
         "success",
       );
       onClose();
@@ -260,6 +303,9 @@ export default function StartingFlowWizard({
 
           {step === "date" && (
             <StepSetDate
+              schedulingFields={state.schedulingFields}
+              sowingMethod={state.sowingMethod}
+              onSowingMethodChange={handleSowingMethodChange}
               onConfirm={handleDateConfirm}
               onBack={() => setStep("variety")}
             />
@@ -289,6 +335,7 @@ export default function StartingFlowWizard({
               cropName={state.cropName}
               varietyName={state.varietyName}
               bedName={state.bedName}
+              sowingMethod={state.sowingMethod}
               dates={state.dates}
               saving={saving}
               onConfirm={handleConfirm}

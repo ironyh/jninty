@@ -1,17 +1,42 @@
 import { useState } from "react";
 import { formatISO, startOfDay } from "date-fns";
-import type { ScheduleDirection } from "../../validation/plantingSchedule.schema.ts";
+import type {
+  ScheduleDirection,
+  SowingMethod,
+} from "../../validation/plantingSchedule.schema.ts";
+import {
+  isSowingMethodSupported,
+  type SchedulingDateFields,
+} from "../../services/schedulingService.ts";
 
 interface StepSetDateProps {
+  schedulingFields: SchedulingDateFields | null;
+  // Committed wizard state (survives Back); the step renders it, never owns it.
+  sowingMethod: SowingMethod | null;
+  onSowingMethodChange: (method: SowingMethod) => void;
   onConfirm: (date: string, direction: ScheduleDirection) => void;
   onBack: () => void;
 }
 
-export default function StepSetDate({ onConfirm, onBack }: StepSetDateProps) {
+export default function StepSetDate({
+  schedulingFields,
+  sowingMethod,
+  onSowingMethodChange,
+  onConfirm,
+  onBack,
+}: StepSetDateProps) {
   const [direction, setDirection] = useState<ScheduleDirection>("forward");
   const [date, setDate] = useState(
     () => formatISO(startOfDay(new Date()), { representation: "date" }),
   );
+  // The choice is offered only when the variety supports both methods; the
+  // wizard seeds the legacy default (indoor branch) for those, so the radio
+  // display always matches the committed state.
+  const showMethodChoice =
+    schedulingFields != null &&
+    isSowingMethodSupported(schedulingFields, "indoor") &&
+    isSowingMethodSupported(schedulingFields, "direct") &&
+    sowingMethod != null;
 
   return (
     <div>
@@ -69,6 +94,53 @@ export default function StepSetDate({ onConfirm, onBack }: StepSetDateProps) {
           </div>
         </label>
       </div>
+
+      {showMethodChoice && (
+        <fieldset className="mt-4">
+          <legend className="text-sm font-medium text-text-secondary">
+            Where will you sow?
+          </legend>
+          <div className="mt-1 space-y-3">
+            <label className="flex items-start gap-3 rounded-lg border border-border-default p-3 transition-colors has-[:checked]:border-primary has-[:checked]:bg-green-50">
+              <input
+                type="radio"
+                name="sowing-method"
+                value="indoor"
+                checked={sowingMethod === "indoor"}
+                onChange={() => onSowingMethodChange("indoor")}
+                className="mt-0.5"
+              />
+              <div>
+                <span className="text-sm font-medium text-text-primary">
+                  Indoors, transplant later
+                </span>
+                <p className="text-xs text-text-muted">
+                  Start seeds inside and move seedlings to the bed.
+                </p>
+              </div>
+            </label>
+
+            <label className="flex items-start gap-3 rounded-lg border border-border-default p-3 transition-colors has-[:checked]:border-primary has-[:checked]:bg-green-50">
+              <input
+                type="radio"
+                name="sowing-method"
+                value="direct"
+                checked={sowingMethod === "direct"}
+                onChange={() => onSowingMethodChange("direct")}
+                className="mt-0.5"
+              />
+              <div>
+                <span className="text-sm font-medium text-text-primary">
+                  Directly outdoors
+                </span>
+                <p className="text-xs text-text-muted">
+                  Sow seeds straight into the bed — no transplant step.
+                </p>
+              </div>
+            </label>
+          </div>
+        </fieldset>
+      )}
 
       <div className="mt-4">
         <label

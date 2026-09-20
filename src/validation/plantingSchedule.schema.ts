@@ -11,6 +11,10 @@ export const plantingScheduleStatusSchema = z.enum([
 
 export const cropSourceSchema = z.enum(["builtin", "custom"]);
 
+export const sowingMethodSchema = z.enum(["indoor", "direct"]);
+
+export type SowingMethod = z.infer<typeof sowingMethodSchema>;
+
 export const plantingScheduleSchema = baseEntitySchema
   .extend({
     // Crop reference
@@ -29,6 +33,9 @@ export const plantingScheduleSchema = baseEntitySchema
     // Scheduling
     anchorDate: isoDate,
     direction: scheduleDirectionSchema,
+    // Explicit sowing method chosen at creation time. Absent on legacy
+    // schedules, which keep the algorithm's own branch selection.
+    sowingMethod: sowingMethodSchema.optional(),
     seasonId: z.string().uuid().optional(),
 
     // Succession planting

@@ -1,5 +1,6 @@
 import { addDays, differenceInCalendarDays, formatISO, parseISO } from "date-fns";
 import type { ScheduleTaskType } from "../validation/scheduleTask.schema.ts";
+import type { SowingMethod } from "../validation/plantingSchedule.schema.ts";
 
 // ─── Types ───
 
@@ -22,6 +23,7 @@ export interface ScheduleTaskInput {
   varietyName: string;
   bedId?: string;
   bedName?: string;
+  sowingMethod?: SowingMethod;
   plantingScheduleId: string;
   isCompleted: boolean;
 }
@@ -74,15 +76,37 @@ export type SchedulingDateFields = {
   directSow: boolean;
 };
 
+/** An explicit sowing method is only offerable/acceptable when the variety's
+ *  existing scheduling fields support it. */
+export function isSowingMethodSupported(
+  variety: SchedulingDateFields,
+  method: SowingMethod,
+): boolean {
+  if (method === "indoor") {
+    return variety.indoorStart && variety.daysToTransplant != null;
+  }
+  return variety.directSow;
+}
+
 export function computeTaskDates(
   variety: SchedulingDateFields,
   anchorDate: string,
   direction: "forward" | "backward",
+  sowingMethod?: SowingMethod,
 ): ComputedDates {
   const anchor = parseISO(anchorDate);
 
+  if (sowingMethod && !isSowingMethodSupported(variety, sowingMethod)) {
+    throw new Error(
+      `Sowing method "${sowingMethod}" is not supported for this variety`,
+    );
+  }
+
+  // Explicit method overrides the branch; absence keeps the legacy choice.
   const isTransplantable =
-    variety.daysToTransplant != null && variety.indoorStart;
+    sowingMethod != null
+      ? sowingMethod === "indoor"
+      : variety.daysToTransplant != null && variety.indoorStart;
 
   if (direction === "forward") {
     if (isTransplantable) {
@@ -176,6 +200,7 @@ export function buildTaskInputs(
   varietyName: string,
   bedId?: string,
   bedName?: string,
+  sowingMethod?: SowingMethod,
 ): ScheduleTaskInput[] {
   const tasks: ScheduleTaskInput[] = [];
 
@@ -200,6 +225,9 @@ export function buildTaskInputs(
     }
     if (bedName) {
       task.bedName = bedName;
+    }
+    if (sowingMethod) {
+      task.sowingMethod = sowingMethod;
     }
     tasks.push(task);
   };
