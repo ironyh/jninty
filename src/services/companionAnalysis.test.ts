@@ -212,6 +212,75 @@ describe("analyzeBedCompanions", () => {
     }
   });
 
+
+  it("no longer matches documented substring accidents", () => {
+    const apple = makePlant({ id: "p1", species: "Malus domestica", nickname: "Apple" });
+    const lemongrass = makePlant({ id: "p2", species: "Cymbopogon citratus", nickname: "Lemongrass" });
+    const cucumber = makePlant({ id: "p3", species: "Cucumis sativus", nickname: "Cucumber" });
+    const watermelon = makePlant({ id: "p4", species: "Citrullus lanatus", nickname: "Watermelon" });
+    const parsley = makePlant({ id: "p5", species: "Petroselinum crispum", nickname: "Parsley" });
+    const rosemary = makePlant({ id: "p6", species: "Salvia rosmarinus", nickname: "Rosemary" });
+
+    const grassBed = analyzeBedCompanions(
+      "b1",
+      [makePlanting({ id: "q1", plantInstanceId: "p1", bedId: "b1" }), makePlanting({ id: "q2", plantInstanceId: "p2", bedId: "b1" })],
+      buildMap([apple, lemongrass]),
+    );
+    const melonBed = analyzeBedCompanions(
+      "b2",
+      [makePlanting({ id: "q3", plantInstanceId: "p3", bedId: "b2" }), makePlanting({ id: "q4", plantInstanceId: "p4", bedId: "b2" })],
+      buildMap([cucumber, watermelon]),
+    );
+    const roseBed = analyzeBedCompanions(
+      "b3",
+      [makePlanting({ id: "q5", plantInstanceId: "p5", bedId: "b3" }), makePlanting({ id: "q6", plantInstanceId: "p6", bedId: "b3" })],
+      buildMap([parsley, rosemary]),
+    );
+
+    // Apple lists grass as bad, Cucumber lists melon as bad, Parsley lists rose
+    // as good: none of these may pair now that the substring accidents
+    // (grass→Lemongrass, melon→Watermelon, rose→Rosemary) are removed.
+    for (const report of [grassBed, melonBed, roseBed]) {
+      expect(report.badPairings.some((p) => ["grass", "melon"].includes(p.tag))).toBe(false);
+      expect(report.goodPairings.some((p) => p.tag === "rose")).toBe(false);
+    }
+  });
+
+  it("retains the brassicas group match with Brussels Sprouts via final-token plural", () => {
+    const tomato = makePlant({ id: "p1", species: "Solanum lycopersicum", nickname: "Tomato" });
+    const brussels = makePlant({ id: "p2", species: "Brassica oleracea var. gemmifera", nickname: "Brussels Sprouts" });
+    const plantings: Planting[] = [
+      makePlanting({ id: "pl1", plantInstanceId: "p1", bedId: "bed-1" }),
+      makePlanting({ id: "pl2", plantInstanceId: "p2", bedId: "bed-1" }),
+    ];
+
+    const report = analyzeBedCompanions("bed-1", plantings, buildMap([tomato, brussels]));
+
+    // Tomato lists brassicas as bad; the member "brussels sprout" must still match
+    // "Brussels Sprouts" through the audited final-token plural rule.
+    expect(report.badPairings.some((p) => p.tag === "brassicas" && p.plantB.id === "p2")).toBe(true);
+  });
+
+  it("suggests rose for hibiscus beside rosemary (accident removal unblocks the suggestion)", () => {
+    const hibiscus = makePlant({ id: "p1", species: "Hibiscus moscheutos", nickname: "Hibiscus" });
+    const rosemary = makePlant({ id: "p2", species: "Salvia rosmarinus", nickname: "Rosemary" });
+    const plantings: Planting[] = [
+      makePlanting({ id: "pl1", plantInstanceId: "p1", bedId: "bed-1" }),
+      makePlanting({ id: "pl2", plantInstanceId: "p2", bedId: "bed-1" }),
+    ];
+
+    const report = analyzeBedCompanions("bed-1", plantings, buildMap([hibiscus, rosemary]));
+
+    // Positive control placed FIRST so the three-suggestion cap cannot hide it:
+    // Hibiscus lists rose first and Rosemary no longer suppresses it (the substring
+    // accident is gone), so rose must be the first suggestion for Hibiscus.
+    expect(report.suggestions[0]).toMatchObject({
+      forPlant: { id: "p1" },
+      suggestedCompanion: "rose",
+    });
+    // And the false good pairing rose→Rosemary must be gone.
+    expect(report.goodPairings.some((p) => p.tag === "rose")).toBe(false);
+  });
   it("deduplicates symmetric pairings", () => {
     // Tomato says basil is good, basil says tomato is good —
     // should only appear once

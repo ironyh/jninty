@@ -84,8 +84,38 @@ function getDisplayName(plant: PlantInstance): string {
 }
 
 /**
+ * Case-insensitive whole-word phrase test: does `name` contain the exact token
+ * sequence of `phrase` (tokens split on non-alphanumeric boundaries)?
+ */
+function wholeWordMatch(name: string, phrase: string): boolean {
+  const nameTokens = name.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  const phraseTokens = phrase.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  if (phraseTokens.length === 0 || phraseTokens.length > nameTokens.length) return false;
+  outer: for (let i = 0; i <= nameTokens.length - phraseTokens.length; i++) {
+    for (let j = 0; j < phraseTokens.length; j++) {
+      if (nameTokens[i + j] !== phraseTokens[j]) continue outer;
+    }
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Audited final-token plural variant of a group-member phrase
+ * (e.g. "brussels sprout" → "brussels sprouts"). No other inflection.
+ */
+function withFinalTokenPlural(phrase: string): string {
+  const tokens = phrase.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  if (tokens.length === 0) return phrase;
+  return [...tokens.slice(0, -1), tokens[tokens.length - 1] + "s"].join(" ");
+}
+
+/**
  * Checks if a companion tag matches a plant's common name.
- * Uses case-insensitive substring matching plus group-name expansion.
+ * Strict deterministic matching: case-insensitive exact or whole-word match,
+ * plus group-name expansion over declared members with a final-token plural
+ * tolerance. No substring fallback — the documented substring accidents
+ * (rose→Rosemary, melon→Watermelon, grass→Lemongrass) are intentionally not matched.
  */
 function companionTagMatchesPlant(
   tag: string,
@@ -98,14 +128,21 @@ function companionTagMatchesPlant(
   const commonNameLower = plantEntry.commonName.toLowerCase();
   const tagLower = tag.toLowerCase();
 
-  // Direct substring match against commonName
-  if (commonNameLower.includes(tagLower)) return true;
+  // Exact normalized match
+  if (commonNameLower === tagLower) return true;
 
-  // Group name expansion: check if the tag is a group name
-  // and the plant's common name matches any group member
+  // Whole-word match against commonName
+  if (wholeWordMatch(commonNameLower, tagLower)) return true;
+
+  // Group name expansion: the tag is a declared group name; the plant matches
+  // any member exactly, as a whole word, or as a final-token plural.
   const groupMembers = COMPANION_GROUP_MEMBERS[tagLower];
   if (groupMembers) {
-    return groupMembers.some((member) => commonNameLower.includes(member));
+    return groupMembers.some(
+      (member) =>
+        wholeWordMatch(commonNameLower, member) ||
+        wholeWordMatch(commonNameLower, withFinalTokenPlural(member)),
+    );
   }
 
   return false;
