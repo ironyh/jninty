@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Button from "./ui/Button";
 import { useFocusTrap } from "../hooks/useFocusTrap";
+import { reloadApp } from "../lib/reloadApp";
 import type { ImportResult } from "../services/exporter";
 import {
   parseZip,
@@ -46,6 +47,11 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
   const [progressTotal, setProgressTotal] = useState(0);
   const [result, setResult] = useState<ImportWriteResult | null>(null);
   const [parsing, setParsing] = useState(false);
+  // A Replace attempt re-creates the local database (even when it fails
+  // partway), so mounted queries, settings and listeners are stale until the
+  // app refreshes. The refresh runs only when the user acknowledges the
+  // summary by closing the dialog.
+  const [reloadOnClose, setReloadOnClose] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(dialogRef);
@@ -95,6 +101,7 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
           ? await executeImportMerge(parsed, handleProgress)
           : await executeImportReplace(parsed, handleProgress);
       setResult(writeResult);
+      setReloadOnClose(mode === "replace");
       setStep("complete");
     } catch (err) {
       setResult({
@@ -102,11 +109,13 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
         skipped: 0,
         errors: [err instanceof Error ? err.message : "Import failed"],
       });
+      setReloadOnClose(mode === "replace");
       setStep("complete");
     }
   }, [parsed, mode, handleProgress]);
 
   const handleClose = useCallback(() => {
+    const shouldReload = reloadOnClose;
     setStep("select");
     setParsed(null);
     setParseError(null);
@@ -114,9 +123,11 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
     setConfirmText("");
     setResult(null);
     setParsing(false);
+    setReloadOnClose(false);
     if (fileRef.current) fileRef.current.value = "";
     onClose();
-  }, [onClose]);
+    if (shouldReload) reloadApp();
+  }, [onClose, reloadOnClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -356,9 +367,23 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
         {/* Step 5: Complete */}
         {step === "complete" && result && (
           <div className="mt-4 space-y-4">
-            <div className="rounded-lg border border-green-200 bg-status-success-bg p-4">
-              <h3 className="text-sm font-bold text-status-success-text">
-                Import Complete
+            <div
+              className={`rounded-lg border p-4 ${
+                result.errors.length > 0
+                  ? "border-amber-300 bg-amber-50"
+                  : "border-green-200 bg-status-success-bg"
+              }`}
+            >
+              <h3
+                className={`text-sm font-bold ${
+                  result.errors.length > 0
+                    ? "text-amber-800"
+                    : "text-status-success-text"
+                }`}
+              >
+                {result.errors.length > 0
+                  ? "Import finished with errors"
+                  : "Import Complete"}
               </h3>
               <div className="mt-2 space-y-1 text-sm text-green-700">
                 <p>Inserted: {String(result.inserted)}</p>
@@ -367,6 +392,16 @@ export default function ImportDialog({ open, onClose }: ImportDialogProps) {
                 )}
               </div>
             </div>
+
+            {reloadOnClose && (
+              <div className="rounded-lg border border-border-default bg-surface p-3">
+                <p className="text-sm text-text-secondary">
+                  When you close this dialog, the app will refresh so the
+                  restored data appears everywhere (lists, settings, and
+                  reminders). This summary stays visible until you close it.
+                </p>
+              </div>
+            )}
 
             {result.errors.length > 0 && (
               <div className="rounded-lg border border-red-200 bg-red-50 p-3">
