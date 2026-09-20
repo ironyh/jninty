@@ -4,7 +4,6 @@ import {
   plantingScheduleSchema,
   type PlantingSchedule,
 } from "../../../validation/plantingSchedule.schema.ts";
-import { ensureAllIndexes } from "../indexes.ts";
 
 const DOC_TYPE = "plantingSchedule";
 
@@ -109,54 +108,49 @@ export async function getById(
   }
 }
 
-export async function getAll(): Promise<PlantingSchedule[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
+/** Prefix-bounded allDocs retrieval: returns ALL docs of this docType (including
+ *  soft-deleted) without the pouchdb-find 25-doc default limit. Callers filter. */
+async function getAllDocsByType(): Promise<PlantingSchedule[]> {
+  const result = await localDB.allDocs({
+    startkey: DOC_TYPE + ":",
+    endkey: DOC_TYPE + ":\ufff0",
+    include_docs: true,
   });
-  return (result.docs as PouchDoc<PlantingSchedule>[])
-    .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+  return (result.rows
+    .map((r) => r.doc)
+    .filter(Boolean) as unknown as PouchDoc<PlantingSchedule>[]).map(
+    stripPouchFields,
+  );
+}
+
+export async function getAll(): Promise<PlantingSchedule[]> {
+  return (await getAllDocsByType()).filter((r) => r.deletedAt == null);
 }
 
 export async function getBySeasonId(
   seasonId: string,
 ): Promise<PlantingSchedule[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<PlantingSchedule>[])
-    .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null && r.seasonId === seasonId);
+  return (await getAllDocsByType()).filter(
+    (r) => r.deletedAt == null && r.seasonId === seasonId,
+  );
 }
 
 export async function getByBedId(
   bedId: string,
 ): Promise<PlantingSchedule[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<PlantingSchedule>[])
-    .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null && r.bedId === bedId);
+  return (await getAllDocsByType()).filter(
+    (r) => r.deletedAt == null && r.bedId === bedId,
+  );
 }
 
 export async function getByDateRange(
   start: string,
   end: string,
 ): Promise<PlantingSchedule[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<PlantingSchedule>[])
-    .map(stripPouchFields)
-    .filter(
-      (r) =>
-        r.deletedAt == null &&
-        r.harvestEndDate >= start &&
-        (r.seedStartDate ?? r.harvestStartDate) <= end,
-    );
+  return (await getAllDocsByType()).filter(
+    (r) =>
+      r.deletedAt == null &&
+      r.harvestEndDate >= start &&
+      (r.seedStartDate ?? r.harvestStartDate) <= end,
+  );
 }

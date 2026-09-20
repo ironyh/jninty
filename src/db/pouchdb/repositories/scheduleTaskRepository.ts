@@ -4,7 +4,6 @@ import {
   scheduleTaskSchema,
   type ScheduleTask,
 } from "../../../validation/scheduleTask.schema.ts";
-import { ensureAllIndexes } from "../indexes.ts";
 
 const DOC_TYPE = "scheduleTask";
 
@@ -223,25 +222,29 @@ export async function getById(
   }
 }
 
-export async function getAll(): Promise<ScheduleTask[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
+/** Prefix-bounded allDocs retrieval: returns ALL docs of this docType (including
+ *  soft-deleted) without the pouchdb-find 25-doc default limit. Callers filter. */
+async function getAllDocsByType(): Promise<ScheduleTask[]> {
+  const result = await localDB.allDocs({
+    startkey: DOC_TYPE + ":",
+    endkey: DOC_TYPE + ":\ufff0",
+    include_docs: true,
   });
-  return (result.docs as PouchDoc<ScheduleTask>[])
-    .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+  return (result.rows
+    .map((r) => r.doc)
+    .filter(Boolean) as unknown as PouchDoc<ScheduleTask>[]).map(
+    stripPouchFields,
+  );
+}
+
+export async function getAll(): Promise<ScheduleTask[]> {
+  return (await getAllDocsByType()).filter((r) => r.deletedAt == null);
 }
 
 export async function getByScheduleId(
   plantingScheduleId: string,
 ): Promise<ScheduleTask[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<ScheduleTask>[])
-    .map(stripPouchFields)
+  return (await getAllDocsByType())
     .filter(
       (r) =>
         r.deletedAt == null &&
@@ -254,12 +257,7 @@ export async function getByDateRange(
   start: string,
   end: string,
 ): Promise<ScheduleTask[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<ScheduleTask>[])
-    .map(stripPouchFields)
+  return (await getAllDocsByType())
     .filter(
       (r) =>
         r.deletedAt == null &&
