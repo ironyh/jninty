@@ -1,0 +1,76 @@
+{
+  "usage": {
+    "key": "5347845",
+    "name": "Pisum sativum L.",
+    "canonicalName": "Pisum sativum",
+    "authorship": "L.",
+    "rank": "SPECIES",
+    "status": "SYNONYM",
+    "genericName": "Pisum",
+    "specificEpithet": "sativum",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Pisum</i> <i>sativum</i> L."
+  },
+  "acceptedUsage": {
+    "key": "5347846",
+    "name": "Lathyrus oleraceus Lam.",
+    "canonicalName": "Lathyrus oleraceus",
+    "authorship": "Lam.",
+    "rank": "SPECIES",
+    "genericName": "Lathyrus",
+    "specificEpithet": "oleraceus",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Lathyrus</i> <i>oleraceus</i> Lam."
+  },
+  "classification": [
+    {
+      "key": "6",
+      "name": "Plantae",
+      "rank": "KINGDOM"
+    },
+    {
+      "key": "7707728",
+      "name": "Tracheophyta",
+      "rank": "PHYLUM"
+    },
+    {
+      "key": "220",
+      "name": "Magnoliopsida",
+      "rank": "CLASS"
+    },
+    {
+      "key": "1370",
+      "name": "Fabales",
+      "rank": "ORDER"
+    },
+    {
+      "key": "5386",
+      "name": "Fabaceae",
+      "rank": "FAMILY"
+    },
+    {
+      "key": "10356062",
+      "name": "Lathyrus",
+      "rank": "GENUS"
+    },
+    {
+      "key": "5347846",
+      "name": "Lathyrus oleraceus",
+      "rank": "SPECIES"
+    }
+  ],
+  "diagnostics": {
+    "matchType": "EXACT",
+    "confidence": 98,
+    "timeTaken": 9,
+    "timings": {
+      "nameNRank": 0,
+      "sciNameMatch": 10,
+      "nameParse": 1,
+      "luceneMatch": 9
+    }
+  },
+  "synonym": true,
+  "left": 629418,
+  "right": 629420
+}

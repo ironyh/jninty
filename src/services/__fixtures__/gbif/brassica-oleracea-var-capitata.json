@@ -1,0 +1,78 @@
+{
+  "usage": {
+    "key": "3042846",
+    "name": "Brassica oleracea var. capitata L.",
+    "canonicalName": "Brassica oleracea capitata",
+    "authorship": "L.",
+    "rank": "VARIETY",
+    "status": "SYNONYM",
+    "genericName": "Brassica",
+    "specificEpithet": "oleracea",
+    "infraspecificEpithet": "capitata",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Brassica</i> <i>oleracea</i> var. <i>capitata</i> L."
+  },
+  "acceptedUsage": {
+    "key": "3042845",
+    "name": "Brassica oleracea L.",
+    "canonicalName": "Brassica oleracea",
+    "authorship": "L.",
+    "rank": "SPECIES",
+    "genericName": "Brassica",
+    "specificEpithet": "oleracea",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Brassica</i> <i>oleracea</i> L."
+  },
+  "classification": [
+    {
+      "key": "6",
+      "name": "Plantae",
+      "rank": "KINGDOM"
+    },
+    {
+      "key": "7707728",
+      "name": "Tracheophyta",
+      "rank": "PHYLUM"
+    },
+    {
+      "key": "220",
+      "name": "Magnoliopsida",
+      "rank": "CLASS"
+    },
+    {
+      "key": "7225535",
+      "name": "Brassicales",
+      "rank": "ORDER"
+    },
+    {
+      "key": "3112",
+      "name": "Brassicaceae",
+      "rank": "FAMILY"
+    },
+    {
+      "key": "3042506",
+      "name": "Brassica",
+      "rank": "GENUS"
+    },
+    {
+      "key": "3042845",
+      "name": "Brassica oleracea",
+      "rank": "SPECIES"
+    }
+  ],
+  "diagnostics": {
+    "matchType": "EXACT",
+    "confidence": 97,
+    "note": "2 synonym homonyms",
+    "timeTaken": 19,
+    "timings": {
+      "nameNRank": 0,
+      "sciNameMatch": 19,
+      "nameParse": 1,
+      "luceneMatch": 18
+    }
+  },
+  "synonym": true,
+  "left": 543300,
+  "right": 543309
+}
