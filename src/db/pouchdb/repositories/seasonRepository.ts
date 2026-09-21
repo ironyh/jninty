@@ -112,12 +112,23 @@ export async function getById(id: string): Promise<Season | undefined> {
   }
 }
 
-export async function getActive(): Promise<Season | undefined> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
+/** Prefix-bounded allDocs retrieval: returns ALL raw docs of this docType
+ *  (including soft-deleted) without the pouchdb-find 25-doc default limit.
+ *  Callers filter. Used by getActive and deactivateAllExcept; getAll is a
+ *  separate concern handled elsewhere. */
+async function getRawSeasonDocs(): Promise<Array<PouchDoc<Season>>> {
+  const result = await localDB.allDocs({
+    startkey: DOC_TYPE + ":",
+    endkey: DOC_TYPE + ":\ufff0",
+    include_docs: true,
   });
-  const seasons = (result.docs as PouchDoc<Season>[])
+  return result.rows.map((r) => r.doc).filter(Boolean) as Array<
+    PouchDoc<Season>
+  >;
+}
+
+export async function getActive(): Promise<Season | undefined> {
+  const seasons = (await getRawSeasonDocs())
     .map(stripPouchFields)
     .filter((r) => r.isActive && r.deletedAt == null);
   return seasons[0];
@@ -137,13 +148,8 @@ export async function getAll(): Promise<Season[]> {
 /** Deactivate all active seasons except the one with the given id. */
 async function deactivateAllExcept(exceptId: string): Promise<void> {
   const timestamp = now();
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
 
-  for (const raw of result.docs) {
-    const doc = raw as PouchDoc<Season>;
+  for (const doc of await getRawSeasonDocs()) {
     const entity = stripPouchFields(doc);
     if (entity.isActive && entity.id !== exceptId && entity.deletedAt == null) {
       const deactivated = seasonSchema.parse({
