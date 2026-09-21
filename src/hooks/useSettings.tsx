@@ -58,6 +58,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
           throw err;
         }
       }
+      // A cancelled completion means this provider is unmounted: the state
+      // update must not run (React's dispatch can even throw without a
+      // window in post-teardown environments). Lifecycle-only — the
+      // initialize write and error semantics above are unaffected.
+      if (cancelled) return;
       setLoading(false);
     })();
     return () => {
