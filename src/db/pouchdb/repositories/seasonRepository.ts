@@ -5,7 +5,6 @@ import {
   seasonSchema,
   type Season,
 } from "../../../validation/season.schema.ts";
-import { ensureAllIndexes } from "../indexes.ts";
 
 const DOC_TYPE = "season";
 
