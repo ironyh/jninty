@@ -205,26 +205,28 @@ export async function getByDateRange(
   start: string,
   end: string,
 ): Promise<Task[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      dueDate: { $gte: start, $lte: end },
-    },
-  });
-  return (result.docs as PouchDoc<Task>[])
+  // complete read with inclusive date boundaries preserved: pouchdb-find's
+  // implicit limit 25 would silently drop matching tasks beyond the first
+  // 25 (see getAllDocsByType).
+  return (await getAllDocsByType<Task>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null && !r.isCompleted);
+    .filter(
+      (r) =>
+        r.deletedAt == null &&
+        !r.isCompleted &&
+        r.dueDate >= start &&
+        r.dueDate <= end,
+    );
 }
 
 export async function getByPlantId(
   plantInstanceId: string,
 ): Promise<Task[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<Task>[])
+  // complete read BEFORE the plant filter: the previous docType-only find
+  // was capped at 25 by pouchdb-find's implicit default limit, so matching
+  // tasks could be lost before this method's own filter ran (see
+  // getAllDocsByType). Completed tasks remain included, as before.
+  return (await getAllDocsByType<Task>(DOC_TYPE))
     .map(stripPouchFields)
     .filter(
       (r) => r.deletedAt == null && r.plantInstanceId === plantInstanceId,

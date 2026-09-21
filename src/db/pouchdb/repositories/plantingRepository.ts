@@ -109,31 +109,21 @@ export async function getById(id: string): Promise<Planting | undefined> {
 }
 
 export async function getBySeason(seasonId: string): Promise<Planting[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      seasonId,
-    },
-  });
-  return (result.docs as PouchDoc<Planting>[])
+  // complete read: pouchdb-find's implicit limit 25 would silently drop
+  // matching plantings beyond the first 25 (see getAllDocsByType).
+  return (await getAllDocsByType<Planting>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.seasonId === seasonId);
 }
 
 export async function getByPlant(
   plantInstanceId: string,
 ): Promise<Planting[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      plantInstanceId,
-    },
-  });
-  return (result.docs as PouchDoc<Planting>[])
+  // complete read: pouchdb-find's implicit limit 25 would silently drop
+  // matching plantings beyond the first 25 (see getAllDocsByType).
+  return (await getAllDocsByType<Planting>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.plantInstanceId === plantInstanceId);
 }
 
 export async function getByBed(bedId: string): Promise<Planting[]> {

@@ -5,7 +5,6 @@ import {
   expenseSchema,
   type Expense,
 } from "../../../validation/expense.schema.ts";
-import { ensureAllIndexes } from "../indexes.ts";
 
 const DOC_TYPE = "expense";
 
@@ -115,14 +114,9 @@ export async function getAll(): Promise<Expense[]> {
 }
 
 export async function getBySeason(seasonId: string): Promise<Expense[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      seasonId,
-    },
-  });
-  return (result.docs as PouchDoc<Expense>[])
+  // complete read: pouchdb-find's implicit limit 25 would silently drop
+  // matching expenses beyond the first 25 (see getAllDocsByType).
+  return (await getAllDocsByType<Expense>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.seasonId === seasonId);
 }

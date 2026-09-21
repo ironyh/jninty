@@ -116,24 +116,18 @@ export async function getById(
 export async function getByPlantId(
   plantInstanceId: string,
 ): Promise<JournalEntry[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      plantInstanceId,
-    },
-  });
-  return (result.docs as PouchDoc<JournalEntry>[])
+  // complete read: pouchdb-find's implicit limit 25 would silently drop
+  // matching entries beyond the first 25 (see getAllDocsByType).
+  return (await getAllDocsByType<JournalEntry>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.plantInstanceId === plantInstanceId);
 }
 
 export async function getRecent(limit: number): Promise<JournalEntry[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<JournalEntry>[])
+  // complete read first, then newest-first ordering, then the requested
+  // count — the newest entries are selected globally, not within a capped
+  // candidate set.
+  return (await getAllDocsByType<JournalEntry>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
@@ -181,14 +175,9 @@ export async function getByDateRange(
 export async function getBySeasonId(
   seasonId: string,
 ): Promise<JournalEntry[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      seasonId,
-    },
-  });
-  return (result.docs as PouchDoc<JournalEntry>[])
+  // complete read: pouchdb-find's implicit limit 25 would silently drop
+  // matching entries beyond the first 25 (see getAllDocsByType).
+  return (await getAllDocsByType<JournalEntry>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.seasonId === seasonId);
 }
