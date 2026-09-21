@@ -45,6 +45,7 @@ import CloudGate from "./components/cloud/CloudGate";
 const GardenMapPage = lazy(() => import("./pages/GardenMapPage"));
 const KnowledgeCategoryPage = lazy(() => import("./pages/KnowledgeCategoryPage"));
 const KnowledgeSpeciesPage = lazy(() => import("./pages/KnowledgeSpeciesPage"));
+const GbifReviewPage = lazy(() => import("./pages/GbifReviewPage"));
 
 function ThemeApplicator() {
   const { settings } = useSettings();
@@ -173,6 +174,11 @@ export default function App() {
                 }
               />
               <Route path="knowledge" element={<KnowledgeHubPage />} />
+              <Route path="knowledge/gbif-review" element={
+                <Suspense fallback={<div className="flex h-64 items-center justify-center text-text-muted">Loading...</div>}>
+                  <GbifReviewPage />
+                </Suspense>
+              } />
               <Route path="knowledge/plants/:category" element={
                 <Suspense fallback={<div className="flex h-64 items-center justify-center text-text-muted">Loading...</div>}>
                   <KnowledgeCategoryPage />

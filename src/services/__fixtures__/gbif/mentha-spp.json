@@ -1,0 +1,58 @@
+{
+  "usage": {
+    "key": "2927173",
+    "name": "Mentha L.",
+    "canonicalName": "Mentha",
+    "authorship": "L.",
+    "rank": "GENUS",
+    "status": "ACCEPTED",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Mentha</i> L."
+  },
+  "classification": [
+    {
+      "key": "6",
+      "name": "Plantae",
+      "rank": "KINGDOM"
+    },
+    {
+      "key": "7707728",
+      "name": "Tracheophyta",
+      "rank": "PHYLUM"
+    },
+    {
+      "key": "220",
+      "name": "Magnoliopsida",
+      "rank": "CLASS"
+    },
+    {
+      "key": "408",
+      "name": "Lamiales",
+      "rank": "ORDER"
+    },
+    {
+      "key": "2497",
+      "name": "Lamiaceae",
+      "rank": "FAMILY"
+    },
+    {
+      "key": "2927173",
+      "name": "Mentha",
+      "rank": "GENUS"
+    }
+  ],
+  "diagnostics": {
+    "matchType": "HIGHERRANK",
+    "confidence": 94,
+    "timeTaken": 27,
+    "timings": {
+      "nameNRank": 0,
+      "sciNameMatch": 27,
+      "nameParse": 1,
+      "luceneMatch": 26
+    }
+  },
+  "synonym": false,
+  "left": 702462,
+  "right": 702708
+}

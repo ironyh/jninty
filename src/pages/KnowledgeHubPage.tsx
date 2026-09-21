@@ -196,6 +196,27 @@ export default function KnowledgeHubPage() {
             })}
           </div>
 
+          {/* Experimental read-only GBIF name-review prototype (agent E, 2026-09-21) */}
+          <div className="mt-8">
+            <Link
+              to="/knowledge/gbif-review"
+              data-testid="gbif-review-entry"
+              className="block rounded-xl border border-dashed border-border-strong bg-surface-elevated p-5 transition-shadow hover:shadow-md"
+            >
+              <div className="flex items-center gap-2">
+                <h2 className="font-display text-lg font-semibold text-text-heading">
+                  GBIF name check
+                </h2>
+                <Badge variant="warning">Experimental</Badge>
+              </div>
+              <p className="mt-1 text-sm text-text-secondary">
+                Compare a catalog plant's scientific name with the GBIF
+                Backbone Taxonomy. Read-only review prototype — nothing is
+                saved or changed.
+              </p>
+            </Link>
+          </div>
+
           {/* Custom entries section */}
           {(() => {
             const customItems = allItems.filter((i) => i.source === "custom");

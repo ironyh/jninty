@@ -1,0 +1,83 @@
+{
+  "usage": {
+    "key": "3042854",
+    "name": "Brassica oleracea var. botrytis L.",
+    "canonicalName": "Brassica oleracea botrytis",
+    "authorship": "L.",
+    "rank": "VARIETY",
+    "status": "SYNONYM",
+    "genericName": "Brassica",
+    "specificEpithet": "oleracea",
+    "infraspecificEpithet": "botrytis",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Brassica</i> <i>oleracea</i> var. <i>botrytis</i> L."
+  },
+  "acceptedUsage": {
+    "key": "7068741",
+    "name": "Brassica cretica subsp. cretica",
+    "canonicalName": "Brassica cretica cretica",
+    "rank": "SUBSPECIES",
+    "code": "BOTANICAL",
+    "genericName": "Brassica",
+    "specificEpithet": "cretica",
+    "infraspecificEpithet": "cretica",
+    "type": "SCIENTIFIC",
+    "formattedName": "<i>Brassica</i> <i>cretica</i> subsp. <i>cretica</i>"
+  },
+  "classification": [
+    {
+      "key": "6",
+      "name": "Plantae",
+      "rank": "KINGDOM"
+    },
+    {
+      "key": "7707728",
+      "name": "Tracheophyta",
+      "rank": "PHYLUM"
+    },
+    {
+      "key": "220",
+      "name": "Magnoliopsida",
+      "rank": "CLASS"
+    },
+    {
+      "key": "7225535",
+      "name": "Brassicales",
+      "rank": "ORDER"
+    },
+    {
+      "key": "3112",
+      "name": "Brassicaceae",
+      "rank": "FAMILY"
+    },
+    {
+      "key": "3042506",
+      "name": "Brassica",
+      "rank": "GENUS"
+    },
+    {
+      "key": "3042837",
+      "name": "Brassica cretica",
+      "rank": "SPECIES"
+    },
+    {
+      "key": "7068741",
+      "name": "Brassica cretica cretica",
+      "rank": "SUBSPECIES"
+    }
+  ],
+  "diagnostics": {
+    "matchType": "EXACT",
+    "confidence": 98,
+    "timeTaken": 15,
+    "timings": {
+      "nameNRank": 0,
+      "sciNameMatch": 16,
+      "nameParse": 1,
+      "luceneMatch": 15
+    }
+  },
+  "synonym": true,
+  "left": 543266,
+  "right": 543266
+}

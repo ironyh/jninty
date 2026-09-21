@@ -1,0 +1,13 @@
+{
+  "diagnostics": {
+    "matchType": "NONE",
+    "issues": [],
+    "confidence": 100,
+    "note": "Multiple equal matches for Dahlia",
+    "timeTaken": 26,
+    "timings": {
+      "sciNameMatch": 27
+    }
+  },
+  "synonym": false
+}
