@@ -1,10 +1,10 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import {
   userPlantKnowledgeSchema,
   type UserPlantKnowledge,
 } from "../../../validation/userPlantKnowledge.schema.ts";
-import { ensureAllIndexes } from "../indexes.ts";
 
 const DOC_TYPE = "userPlantKnowledge";
 
@@ -146,13 +146,7 @@ export async function getById(
 }
 
 export async function getAll(): Promise<UserPlantKnowledge[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-    },
-  });
-  return (result.docs as PouchDoc<UserPlantKnowledge>[])
+  return (await getAllDocsByType<UserPlantKnowledge>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null);
 }

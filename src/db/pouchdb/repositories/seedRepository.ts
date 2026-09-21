@@ -1,4 +1,5 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import { seedSchema, type Seed } from "../../../validation/seed.schema.ts";
 import { ensureAllIndexes } from "../indexes.ts";
@@ -105,11 +106,7 @@ export async function getById(id: string): Promise<Seed | undefined> {
 }
 
 export async function getAll(): Promise<Seed[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<Seed>[])
+  return (await getAllDocsByType<Seed>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null);
 }

@@ -1,4 +1,5 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import {
   gardenBedSchema,
@@ -113,11 +114,7 @@ export async function getById(
 }
 
 export async function getAll(): Promise<GardenBed[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<GardenBed>[])
+  return (await getAllDocsByType<GardenBed>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null);
 }

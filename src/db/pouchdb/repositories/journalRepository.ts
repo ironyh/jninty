@@ -1,4 +1,5 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import {
   journalEntrySchema,
@@ -155,11 +156,7 @@ export async function getByActivityType(
 }
 
 export async function getAll(): Promise<JournalEntry[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<JournalEntry>[])
+  return (await getAllDocsByType<JournalEntry>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));

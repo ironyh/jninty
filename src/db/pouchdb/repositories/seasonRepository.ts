@@ -1,4 +1,5 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import {
   seasonSchema,
@@ -124,11 +125,7 @@ export async function getActive(): Promise<Season | undefined> {
 }
 
 export async function getAll(): Promise<Season[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<Season>[])
+  return (await getAllDocsByType<Season>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null)
     .sort((a, b) => b.year - a.year);

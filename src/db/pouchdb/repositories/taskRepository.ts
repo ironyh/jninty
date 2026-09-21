@@ -1,5 +1,6 @@
 import { addDays, formatISO, startOfDay } from "date-fns";
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import { taskSchema, type Task } from "../../../validation/task.schema.ts";
 import { ensureAllIndexes } from "../indexes.ts";
@@ -203,11 +204,7 @@ export async function getOverdue(): Promise<Task[]> {
 }
 
 export async function getAll(): Promise<Task[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<Task>[])
+  return (await getAllDocsByType<Task>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null);
 }

@@ -1,4 +1,5 @@
 import { localDB } from "../client.ts";
+import { getAllDocsByType } from "../getAllDocsByType.ts";
 import { type PouchDoc, stripPouchFields, toPouchDoc } from "../utils.ts";
 import {
   plantingSchema,
@@ -149,11 +150,7 @@ export async function getByBed(bedId: string): Promise<Planting[]> {
 }
 
 export async function getAll(): Promise<Planting[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: { docType: DOC_TYPE },
-  });
-  return (result.docs as PouchDoc<Planting>[])
+  return (await getAllDocsByType<Planting>(DOC_TYPE))
     .map(stripPouchFields)
     .filter((r) => r.deletedAt == null);
 }
