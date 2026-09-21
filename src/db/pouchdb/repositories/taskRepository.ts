@@ -175,32 +175,24 @@ export async function getUpcoming(days: number): Promise<Task[]> {
     representation: "date",
   });
 
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      dueDate: { $gte: today, $lte: future },
-    },
-  });
-
-  return (result.docs as PouchDoc<Task>[])
+  return (await getAllDocsByType<Task>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null && !r.isCompleted);
+    .filter(
+      (r) =>
+        r.deletedAt == null &&
+        !r.isCompleted &&
+        r.dueDate >= today &&
+        r.dueDate <= future,
+    );
 }
 
 export async function getOverdue(): Promise<Task[]> {
   await ensureAllIndexes();
   const today = todayDate();
 
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      dueDate: { $lt: today },
-    },
-  });
-
-  return (result.docs as PouchDoc<Task>[])
+  return (await getAllDocsByType<Task>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null && !r.isCompleted);
+    .filter((r) => r.deletedAt == null && !r.isCompleted && r.dueDate < today);
 }
 
 export async function getAll(): Promise<Task[]> {
