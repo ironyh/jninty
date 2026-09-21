@@ -43,8 +43,20 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       if (stored) {
         setSettings(stored);
       } else {
-        const initialized = await settingsRepository.update(DEFAULT_SETTINGS);
-        if (!cancelled) setSettings(initialized);
+        try {
+          const initialized = await settingsRepository.initialize(
+            DEFAULT_SETTINGS,
+          );
+          if (!cancelled) setSettings(initialized);
+        } catch (err) {
+          // Cancellation only means this provider has no active consumer for
+          // the outcome anymore — it does NOT tell us what happened to the
+          // write (the database may be perfectly intact), so the error is
+          // dropped purely on lifecycle grounds. While mounted, failures
+          // propagate: initialization is never reported as successful.
+          if (cancelled) return;
+          throw err;
+        }
       }
       setLoading(false);
     })();
