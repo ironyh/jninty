@@ -121,16 +121,13 @@ export async function getAll(): Promise<PlantInstance[]> {
 export async function getByStatus(
   status: PlantStatus,
 ): Promise<PlantInstance[]> {
-  await ensureAllIndexes();
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      status,
-    },
-  });
-  return (result.docs as PouchDoc<PlantInstance>[])
+  // Complete read BEFORE the status filter: the previous docType+status find
+  // was capped at 25 by pouchdb-find's implicit default limit, so active
+  // plants beyond the cap were silently lost from the journal-entry and
+  // quick-log pickers (see getAllDocsByType).
+  return (await getAllDocsByType<PlantInstance>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter((r) => r.deletedAt == null && r.status === status);
 }
 
 export async function getByType(type: PlantType): Promise<PlantInstance[]> {
