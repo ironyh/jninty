@@ -13,11 +13,19 @@ import botrytis from "./__fixtures__/gbif/brassica-oleracea-var-botrytis.json";
 import capitata from "./__fixtures__/gbif/brassica-oleracea-var-capitata.json";
 import menthaSpp from "./__fixtures__/gbif/mentha-spp.json";
 import dahliaSpp from "./__fixtures__/gbif/dahlia-spp.json";
+import dahliaSppKingdomPlantae from "./__fixtures__/gbif/dahlia-spp-kingdom-plantae.json";
+import lactucaSativaKingdomPlantae from "./__fixtures__/gbif/lactuca-sativa-kingdom-plantae.json";
+import unknownNameKingdomPlantae from "./__fixtures__/gbif/unknown-name-kingdom-plantae.json";
 import pisumSativum from "./__fixtures__/gbif/pisum-sativum.json";
 
 // Fixtures are the saved raw GBIF v2 response bodies captured 2026-09-20
 // (Temp/jninty-companion/api-feasibility-2026-09-20/raw/gbif/v2/) — real
 // service responses, replayed offline for deterministic tests.
+// dahlia-spp-kingdom-plantae.json is the fresh 2026-09-22 capture of the same
+// name WITH the kingdom=Plantae classification parameter (saved in
+// Temp/jninty-companion/api-next-20260922/evidence/): HIGHERRANK to the
+// accepted plant genus Dahlia Cav. — a genus-level candidate, not an exact
+// species identity.
 const typedFixture = (f: unknown) => f as GbifMatchResponse;
 
 function okResponse(body: unknown): Response {
@@ -37,13 +45,25 @@ beforeEach(() => {
 });
 
 describe("buildGbifMatchUrl", () => {
-  it("URL-encodes the scientific name", () => {
+  it("URL-encodes the scientific name and always carries the Plantae kingdom context", () => {
     expect(buildGbifMatchUrl("Lactuca sativa")).toBe(
-      "https://api.gbif.org/v2/species/match?scientificName=Lactuca%20sativa",
+      "https://api.gbif.org/v2/species/match?scientificName=Lactuca%20sativa&kingdom=Plantae",
     );
     expect(buildGbifMatchUrl("Petunia × hybrida")).toBe(
-      "https://api.gbif.org/v2/species/match?scientificName=Petunia%20%C3%97%20hybrida",
+      "https://api.gbif.org/v2/species/match?scientificName=Petunia%20%C3%97%20hybrida&kingdom=Plantae",
     );
+  });
+
+  it("carries kingdom=Plantae for every catalog name, including homonym-prone ones (request-parameter regression)", () => {
+    // The screen's name source is the built-in plant catalog only
+    // (GbifReviewPage loads loadKnowledgeBase(); no free-text input), so
+    // Plantae is a valid constant context. "Dahlia spp." previously returned
+    // NONE ungated because of the homonymous animal genus.
+    for (const name of ["Dahlia spp.", "Lactuca sativa", "Mentha spp.", "Petunia × hybrida"]) {
+      const url = buildGbifMatchUrl(name);
+      expect(url).toContain("kingdom=Plantae");
+      expect(url).toContain(`scientificName=${encodeURIComponent(name)}`);
+    }
   });
 });
 
@@ -55,7 +75,7 @@ describe("fetchGbifMatch", () => {
     expect(outcome.kind).toBe("match");
     if (outcome.kind !== "match") return;
     expect(outcome.requestUrl).toBe(
-      "https://api.gbif.org/v2/species/match?scientificName=Lactuca%20sativa",
+      "https://api.gbif.org/v2/species/match?scientificName=Lactuca%20sativa&kingdom=Plantae",
     );
     expect(outcome.result.usage?.key).toBe("7403263");
     expect(outcome.result.usage?.status).toBe("ACCEPTED");
@@ -103,6 +123,90 @@ describe("fetchGbifMatch", () => {
     expect(outcome.result.diagnostics.matchType).toBe("NONE");
     expect(outcome.result.diagnostics.note).toContain("Multiple equal matches");
     expect(outcome.result.usage).toBeUndefined();
+  });
+
+  it("resolves Dahlia spp. to the accepted plant genus when kingdom=Plantae disambiguates (paired capture 2026-09-22)", async () => {
+    // Fresh capture WITH the kingdom parameter (saved paired evidence,
+    // api-next-20260922/evidence/repro-after-kingdom-plantae-dahlia.json):
+    // HIGHERRANK to the accepted plant genus Dahlia Cav. This is a genus-level
+    // CANDIDATE, never an exact species identity — asserted via the findings
+    // below, not via any exact-match claim.
+    const outcome = await fetchGbifMatch("Dahlia spp.", {
+      fetchImpl: fetchReturning(dahliaSppKingdomPlantae),
+    });
+
+    expect(outcome.kind).toBe("match");
+    if (outcome.kind !== "match") return;
+    expect(outcome.result.diagnostics.matchType).toBe("HIGHERRANK");
+    expect(outcome.result.diagnostics.confidence).toBe(95);
+    expect(outcome.result.usage?.name).toBe("Dahlia Cav.");
+    expect(outcome.result.usage?.rank).toBe("GENUS");
+    expect(outcome.result.usage?.status).toBe("ACCEPTED");
+    expect(outcome.result.usage?.key).toBe("3093023");
+    expect(gbifFamilyOf(outcome.result)).toBe("Asteraceae");
+
+    // The findings must present it as a higher-rank candidate, never as an
+    // exact identity.
+    const findings = reviewFindings("Dahlia spp.", undefined, outcome.result);
+    const titles = findings.map((f) => f.title);
+    expect(titles).toContain("Matched only at a higher rank (genus)");
+    expect(titles).not.toContain("Exact match, currently accepted");
+  });
+
+  it("resolves Dahlia spp. to the accepted plant genus when kingdom=Plantae disambiguates (paired capture 2026-09-22, Lactuca exact control unchanged)", async () => {
+    // Paired control with the kingdom parameter (fresh 2026-09-22 capture,
+    // api-next-20260922/evidence/paired-evidence-r1.json): an unambiguous name
+    // keeps its exact identity — same usage (key/name/rank/status) and the same
+    // classification chain as ungated. The only measured difference is
+    // diagnostics.confidence 99 -> 100 (a scoring shift, no identity change);
+    // the screen labels this score as GBIF's internal value, not a certainty.
+    const outcome = await fetchGbifMatch("Lactuca sativa", {
+      fetchImpl: fetchReturning(lactucaSativaKingdomPlantae),
+    });
+
+    expect(outcome.kind).toBe("match");
+    if (outcome.kind !== "match") return;
+    expect(outcome.result.diagnostics.matchType).toBe("EXACT");
+    expect(outcome.result.diagnostics.confidence).toBe(100);
+    expect(outcome.result.usage?.name).toBe("Lactuca sativa L.");
+    expect(outcome.result.usage?.rank).toBe("SPECIES");
+    expect(outcome.result.usage?.status).toBe("ACCEPTED");
+    expect(outcome.result.usage?.key).toBe("7403263");
+    // classification chain unchanged by the kingdom hint
+    expect(
+      (outcome.result.classification ?? []).map((c) => `${c.rank}:${c.name}`).join(" > "),
+    ).toBe(
+      "KINGDOM:Plantae > PHYLUM:Tracheophyta > CLASS:Magnoliopsida > ORDER:Asterales > FAMILY:Asteraceae > GENUS:Lactuca > SPECIES:Lactuca sativa",
+    );
+
+    // exact identity: the clean-exact finding applies (no higher-rank finding)
+    const titles = reviewFindings("Lactuca sativa", "Asteraceae", outcome.result).map((f) => f.title);
+    expect(titles).toContain("Exact match, currently accepted");
+    expect(titles).not.toContain("Matched only at a higher rank (genus)");
+  });
+
+  it("handles a constructed unknown name under kingdom=Plantae as a kingdom-level candidate — never an error, never a fabricated species", async () => {
+    // Captured 2026-09-22 (one targeted read-only GET, provenance in
+    // implementation/unknown-name-kingdom-plantae-provenance.json): the
+    // constructed name "Nonexistus fabricatus" does not return NONE with the
+    // kingdom hint — GBIF falls back to the kingdom rank itself (HIGHERRANK 99,
+    // usage Plantae KINGDOM ACCEPTED). The adapter must surface that as a
+    // bounded kingdom-level candidate, never as an error or a species claim.
+    const outcome = await fetchGbifMatch("Nonexistus fabricatus", {
+      fetchImpl: fetchReturning(unknownNameKingdomPlantae),
+    });
+
+    expect(outcome.kind).toBe("match");
+    if (outcome.kind !== "match") return;
+    expect(outcome.result.diagnostics.matchType).toBe("HIGHERRANK");
+    expect(outcome.result.usage?.name).toBe("Plantae");
+    expect(outcome.result.usage?.rank).toBe("KINGDOM");
+    expect(outcome.result.usage?.status).toBe("ACCEPTED");
+
+    const findings = reviewFindings("Nonexistus fabricatus", undefined, outcome.result);
+    const titles = findings.map((f) => f.title);
+    expect(titles).toContain("Matched only at a higher rank (kingdom)");
+    expect(titles).not.toContain("Exact match, currently accepted");
   });
 
   it("returns the genus-level HIGHERRANK candidate for the captured Mentha spp. response", async () => {

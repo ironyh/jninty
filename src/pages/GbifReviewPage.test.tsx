@@ -100,7 +100,7 @@ describe("GbifReviewPage", () => {
     );
     expect(screen.getByTestId("gbif-api-request-link")).toHaveAttribute(
       "href",
-      "https://api.gbif.org/v2/species/match?scientificName=Dahlia%20spp.",
+      "https://api.gbif.org/v2/species/match?scientificName=Dahlia%20spp.&kingdom=Plantae",
     );
     // D1: completion is announced politely even for the no-candidate case.
     expect(screen.getByTestId("gbif-announce-done")).toHaveTextContent(
