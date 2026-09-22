@@ -11,13 +11,20 @@ import { z } from "zod";
 // Endpoint evidence (verified 2026-09-20 against the official OpenAPI spec,
 // https://techdocs.gbif.org/openapi/checklistbank.json, saved copy
 // Temp/jninty-companion/api-feasibility-2026-09-20/raw/gbif/openapi-checklistbank.json):
-//   GET https://api.gbif.org/v2/species/match?scientificName=...
+//   GET https://api.gbif.org/v2/species/match?scientificName=...&kingdom=Plantae
+//   (kingdom=Plantae is the catalog's constant context: the review screen only
+//   offers built-in plant-catalog names, and the parameter disambiguates
+//   cross-kingdom homonyms — e.g. "Dahlia spp." otherwise returns NONE because
+//   an animal genus Dahlia Pagenstecher, 1900 shares the name; with the
+//   parameter GBIF resolves the accepted plant genus Dahlia Cav.)
 // v1 /v1/species/match is officially deprecated in that spec; v2 is current.
 // Access observed without keys/accounts; data license CC BY 4.0 (GBIF
 // Backbone Taxonomy registry record). Attribution is rendered in the UI.
 
 export const GBIF_MATCH_ENDPOINT = "https://api.gbif.org/v2/species/match";
 export const GBIF_SPECIES_PAGE_BASE = "https://www.gbif.org/species";
+/** Constant classification context for the built-in plant catalog. */
+export const GBIF_KINGDOM_FILTER = "Plantae";
 /** Registry record for the GBIF Backbone Taxonomy dataset (license: CC BY 4.0). */
 export const GBIF_DATASET_URL =
   "https://www.gbif.org/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c";
@@ -135,7 +142,9 @@ export function clearGbifSessionCache(): void {
 // ─── Core fetch ───
 
 export function buildGbifMatchUrl(scientificName: string): string {
-  return `${GBIF_MATCH_ENDPOINT}?scientificName=${encodeURIComponent(scientificName)}`;
+  return `${GBIF_MATCH_ENDPOINT}?scientificName=${encodeURIComponent(
+    scientificName,
+  )}&kingdom=${GBIF_KINGDOM_FILTER}`;
 }
 
 export interface FetchGbifMatchOptions {
