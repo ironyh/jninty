@@ -35,6 +35,7 @@ import { localDB, getRemoteInfo, type RemoteDBInfo } from "../db/pouchdb/client.
 import { clearAllOriginals } from "../db/pouchdb/originalsStore.ts";
 import { useNotifications } from "../hooks/useNotifications.ts";
 import CloudSyncSettings from "../components/cloud/CloudSyncSettings";
+import LocationMapPicker from "../components/map/LocationMapPicker";
 import { useIsAuthenticated } from "../store/authStore";
 
 // ─── Growing zones (USDA 1a–13b) ───
@@ -240,6 +241,14 @@ export default function SettingsPage() {
     if (trimmed && trimmed !== (settings.gardenName ?? "")) {
       void updateSettings({ gardenName: trimmed });
     }
+  };
+
+  /** Map-picker save: same cache discipline as manual coordinate edits —
+   *  weather cache is cleared first, persistence is awaited, and a failure
+   *  propagates to the picker (which keeps the pending selection). */
+  const handleMapSave = async (latitude: number, longitude: number) => {
+    await clearWeatherCache();
+    await updateSettings({ latitude, longitude });
   };
 
   const handleLatBlur = () => {
@@ -747,6 +756,15 @@ export default function SettingsPage() {
               ))}
             </div>
           )}
+
+          {/* Choose position on a map (read-only tile background; saves only
+              via the explicit Save button — no geocoding, no writes on open) */}
+          <LocationMapPicker
+            latitude={settings.latitude}
+            longitude={settings.longitude}
+            onSave={handleMapSave}
+          />
+
 
           {/* Manual coordinate entry */}
           <div className="grid grid-cols-2 gap-3">
