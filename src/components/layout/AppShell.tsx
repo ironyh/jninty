@@ -489,7 +489,7 @@ export default function AppShell() {
       </aside>
 
       {/* ── Main content area ── */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile header */}
         <header className="flex items-center justify-between border-b border-border-default bg-surface-elevated px-4 py-3 md:hidden">
           <div className="flex items-center gap-2">
