@@ -125,22 +125,24 @@ export async function getBySpecies(species: string): Promise<Seed[]> {
 }
 
 export async function getExpiringSoon(days: number): Promise<Seed[]> {
-  await ensureAllIndexes();
+  // Complete read BEFORE the expiry filter: the previous docType+expiryDate
+  // find was capped at 25 by pouchdb-find's implicit default limit, so the
+  // dashboard's "N seeds expiring soon" count silently undercounted (see
+  // getAllDocsByType). Inclusive bounds and soft-delete exclusion are kept.
   const today = new Date();
   const cutoff = new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
   const todayDate = today.toISOString().split("T")[0]!;
   const cutoffDate = cutoff.toISOString().split("T")[0]!;
 
-  const result = await localDB.find({
-    selector: {
-      docType: DOC_TYPE,
-      expiryDate: { $gte: todayDate, $lte: cutoffDate },
-    },
-  });
-
-  return (result.docs as PouchDoc<Seed>[])
+  return (await getAllDocsByType<Seed>(DOC_TYPE))
     .map(stripPouchFields)
-    .filter((r) => r.deletedAt == null);
+    .filter(
+      (r) =>
+        r.deletedAt == null &&
+        r.expiryDate != null &&
+        r.expiryDate >= todayDate &&
+        r.expiryDate <= cutoffDate,
+    );
 }
 
 /**
