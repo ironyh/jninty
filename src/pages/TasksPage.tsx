@@ -630,6 +630,17 @@ export default function TasksPage() {
   ).length;
   const overdueCount = overdueManual + overdueSchedule;
 
+  // Advise only if clearing the season filter alone would reveal a manual task
+  // (origin filter unchanged): manual tasks must be shown and at least one must
+  // sit outside the effective season
+  const tasksHiddenBySeasonFilter =
+    effectiveSeasonFilter !== "" &&
+    showManual &&
+    allTasks.some((t) => t.seasonId !== effectiveSeasonFilter) &&
+    totalPending === 0 &&
+    visibleCompletedManual.length === 0 &&
+    visibleCompletedSchedule.length === 0;
+
   return (
     <div className="mx-auto max-w-2xl p-4">
       {/* Header */}
@@ -787,10 +798,14 @@ export default function TasksPage() {
             <div className="mt-12 text-center">
               <ClipboardCheckIcon className="mx-auto h-16 w-16 text-text-muted" />
               <p className="mt-4 text-lg font-medium text-text-secondary">
-                No tasks yet
+                {tasksHiddenBySeasonFilter
+                  ? "No tasks in this season"
+                  : "No tasks yet"}
               </p>
               <p className="mt-1 text-sm text-text-secondary">
-                Add your first task with the + button below.
+                {tasksHiddenBySeasonFilter
+                  ? "Switch to All Seasons to see them."
+                  : "Add your first task with the + button below."}
               </p>
             </div>
           ) : totalPending === 0 ? (

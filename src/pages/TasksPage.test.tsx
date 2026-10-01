@@ -5,7 +5,11 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import { formatISO, addDays, subDays } from "date-fns";
 import { clearPouchDB } from "../db/pouchdb/testUtils.ts";
-import { taskRepository, plantRepository } from "../db/index.ts";
+import {
+  taskRepository,
+  plantRepository,
+  seasonRepository,
+} from "../db/index.ts";
 import { SettingsProvider } from "../hooks/useSettings.tsx";
 import { ToastProvider } from "../components/ui/Toast.tsx";
 import TasksPage from "./TasksPage.tsx";
@@ -280,5 +284,105 @@ describe("TasksPage", () => {
       overdue.compareDocumentPosition(future) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
+  });
+});
+
+describe("TasksPage season filter empty state", () => {
+  async function seedActiveSeason() {
+    return seasonRepository.create({
+      name: "2026 Growing Season",
+      year: 2026,
+      startDate: "2026-01-01",
+      endDate: "2026-12-31",
+      isActive: true,
+    });
+  }
+
+  it("keeps the original empty state when an active season exists but no tasks do", async () => {
+    await seedActiveSeason();
+
+    renderPage();
+
+    await waitFor(() => {
+      expect(screen.getByText("No tasks yet")).toBeInTheDocument();
+    });
+    expect(
+      screen.getByText("Add your first task with the + button below."),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("No tasks in this season"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows a season-specific message when all tasks belong to another season", async () => {
+    await seedActiveSeason();
+    const otherSeason = await seasonRepository.create({
+      name: "2025 Growing Season",
+      year: 2025,
+      startDate: "2025-01-01",
+      endDate: "2025-12-31",
+      isActive: false,
+    });
+    await taskRepository.create({
+      title: "Last year's task",
+      dueDate: futureDate(1),
+      priority: "normal",
+      isCompleted: false,
+      seasonId: otherSeason.id,
+    });
+
+    renderPage();
+
+    await waitFor(() => {
+      expect(screen.getByText("No tasks in this season")).toBeInTheDocument();
+    });
+    expect(
+      screen.getByText("Switch to All Seasons to see them."),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("No tasks yet")).not.toBeInTheDocument();
+    expect(screen.queryByText("Last year's task")).not.toBeInTheDocument();
+
+    // Switching the season filter to All Seasons reveals the hidden task
+    const user = userEvent.setup();
+    await user.selectOptions(screen.getByLabelText("Filter by season"), "");
+    await waitFor(() => {
+      expect(screen.getByText("Last year's task")).toBeInTheDocument();
+    });
+  });
+
+  it("does not show the season advice when the Schedule filter hides an in-season manual task", async () => {
+    const activeSeason = await seedActiveSeason();
+    await taskRepository.create({
+      title: "This season task",
+      dueDate: futureDate(1),
+      priority: "normal",
+      isCompleted: false,
+      seasonId: activeSeason.id,
+    });
+
+    const user = userEvent.setup();
+    renderPage();
+
+    await waitFor(() => {
+      expect(screen.getByText("This season task")).toBeInTheDocument();
+    });
+
+    // Origin filter Schedule hides the manual task — the season filter does not
+    await user.click(screen.getByRole("button", { name: "Schedule" }));
+
+    // Ordinary empty state: the season advice would misattribute the hiding
+    await waitFor(() => {
+      expect(screen.getByText("No tasks yet")).toBeInTheDocument();
+    });
+    expect(
+      screen.getByText("Add your first task with the + button below."),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("No tasks in this season"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Switch to All Seasons to see them."),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText("This season task")).not.toBeInTheDocument();
   });
 });
